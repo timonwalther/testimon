@@ -71,7 +71,16 @@
 
       </div>
     
-	<div><p></p></div>
+	<div><p>
+	<?php
+	 ini_set('display_errors', 'On');
+	 error_reporting(E_ALL | E_STRICT);
+	 $applikation = 'perl ../../cgi-bin/script.pl';
+     $output = shell_exec($applikation);
+	 echo $output;
+	
+	?>
+	</p></div>
 	
 	</body>
 	

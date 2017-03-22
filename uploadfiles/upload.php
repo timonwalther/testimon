@@ -40,6 +40,7 @@ for($i=0; $i < count($filenames); $i++){
 	//error_log ("beginntarget  ".$target." endtarget",3,"error.log");
 	//$success = true;
 	
+	error_log ("1 ".$file_data['tmp_name']." 2 ".$file_data['name']."||",3,"error.log");
 	
     if(move_uploaded_file($file_data['tmp_name'], "uploads/".$file_data['name'])) {
         $success = true;
