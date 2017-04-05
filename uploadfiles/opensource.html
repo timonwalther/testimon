@@ -9,7 +9,27 @@
 <div class="container">
 
 
+<!--
+    <label class="control-label">Select Files</label>
+    <input id="input-6" name="input6[]" type="file" multiple class="file-loading">
+    <script>
+		// initialize with defaults
+		$("#input-id").fileinput();
 
+		// with plugin options
+		$("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
+	
+        $("#input-6").fileinput({
+            showUpload: false,
+            maxFileCount: 10,
+            mainClass: "input-group-lg"
+        });
+    </script>
+-->
+
+
+<!--name="inputKE2[]" -->
+ 
 <label class="control-label">Select Files</label>
 <input id="input-ke-2" name="input-ke-2" type="file" multiple class="file-loading">
 <script>
@@ -25,7 +45,7 @@ $("#input-ke-2").fileinput({
     uploadAsync: true, 
     theme: "explorer",
 	uploadAsync: true,
-    uploadUrl: "uploadfiles/upload.php",
+    uploadUrl: "/ang/uploadfiles/upload.php",
     minFileCount: 1,
     maxFileCount: 5,
     overwriteInitial: false,

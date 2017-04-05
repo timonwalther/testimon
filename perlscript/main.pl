@@ -73,6 +73,8 @@ require "dependency.pl";
 	#this implemented the method in depends 
 	Worker (@file_content);
 	
+	print "Success\n";
+	
 	#print the files array to check everything is allright	
 
 

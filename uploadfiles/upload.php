@@ -11,12 +11,6 @@ if (empty($_FILES['input-ke-2']))
 // get the files posted
 $file_data = $_FILES['input-ke-2'];
 
-// get user id posted
-//$userid = empty($_POST['userid']) ? '' : $_POST['userid'];
-
-// get user name posted
-//$username = empty($_POST['username']) ? '' : $_POST['username'];
-
 // a flag to see if everything is ok
 $success = null;
 
@@ -28,18 +22,12 @@ $filenames = $file_data['name'];
 
 
 $target_dir = "upload/";
-//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
 
 // loop and process files
 for($i=0; $i < count($filenames); $i++){
-    $ext = explode('.', basename($filenames[$i]));
-	//error_log ("ext  ".$ext,3,"error.log");
+    
 	
-    //$target = "uploads" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
-	//error_log ("beginntarget  ".$target." endtarget",3,"error.log");
-	//$success = true;
-	
+	$ext = explode('.', basename($filenames[$i]));
 	error_log ("1 ".$file_data['tmp_name']." 2 ".$file_data['name']."||",3,"error.log");
 	
     if(move_uploaded_file($file_data['tmp_name'], "uploads/".$file_data['name'])) {

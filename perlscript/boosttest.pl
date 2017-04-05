@@ -11,8 +11,14 @@ sub builtElements {
 	my %testCaseInfoInit		= %{shift()};
 	my %testCaseInfoLine 	 	= %{shift()};
     my @caseLines           	= @{shift()}; 
-	my @caseFiles           	= @{shift()}; 
+	my @caseFiles           	= @{shift()};
+    my $suite                   = 'suite="'.shift().'"';
+	my %testTimes				= %{shift()}; 	
 
+	#print "@testTimes\n\n";
+	
+    my $testTime;
+	
 	my @testCaseInfoResult   	= ();
 	
 	my $info;			 	
@@ -30,6 +36,7 @@ sub builtElements {
 			$caseLine			= @caseLines[$lineIndex];
 			$caseFile			= @caseFiles[$lineIndex];
 			$caseLine			= 'case'.$caseLine;
+			
 			$lineIndex++;
 			
 			while ($caseLine =~ s/\s+//) {}
@@ -38,6 +45,10 @@ sub builtElements {
 			#go trough the hash entry by entry 
 			for (my $i = 0; $i < scalar @{$testCaseInfoInit{$key}}; $i++) {
 			
+				$testTime			= 'testCaseTime="'.$testTimes{$key}.'"'; 
+				
+				print 
+				
 				$info =  @{$testCaseInfoInit{$key}}[$i]->to_literal;
 				while ($info =~ s/\s+//) {}
 			
@@ -49,7 +60,7 @@ sub builtElements {
 					$info =~ s/check//;
 					$info =~ s/haspassed//;
 					
-					$info = '<test-case-passed type="file" '.@{$testCaseInfoLine{$key}}[$i].' '.$case.' '.$caseLine.' '.$caseFile.'>'.$info.'</test-case-passed>' ;
+					$info = '<test-case-passed type="file" '.@{$testCaseInfoLine{$key}}[$i].' '.$case.' '.$caseLine.' '.$caseFile.' '.$suite.' '.$testTime .'>'.$info.'</test-case-passed>' ;
 					push @testCaseInfoResult, $info;
 				}
 			}#for end			
@@ -68,16 +79,20 @@ sub Worker {
  
   for  (my $i = 0; $i < scalar @_; $i++) {
      
-		$test   				= $parser->parse_string($_[$i]);
+		$test   					= $parser->parse_string($_[$i]);
 
 		foreach my $case ($test->findnodes('/TestLog/TestSuite')) {
   		
+		        my $suite			= $test->findnodes('/TestLog/TestSuite/@name');
+		
 				my @caseNames      	= $case->findnodes('//TestCase/@name');
 				my @caseLines		= $case->findnodes('//TestCase/@line'); 
 				my @caseFiles       = $case->findnodes('//TestCase/@file');
-		
+				#my @testTime        = $case->findnodes('//TestCase/TestingTime')->to_literal; 
+	
 				my %info;
 				my %line;
+				my %testTime;
 		
 				for (my $j = 0; $j < scalar @caseNames; $j++) {
 		
@@ -88,13 +103,15 @@ sub Worker {
 				my $query 				 = '//TestCase[@name=\''.@caseNames[$j].'\']/Info';
 				$info{@caseNames[$j]} 	 = $case->findnodes($query); 		 
 				$query  		    	.= '/@line';
-				$line{@caseNames[$j]}    = $case->findnodes($query);	
+				$line{@caseNames[$j]}    = $case->findnodes($query);
+				$testTime{@caseNames[$j]}= $case->findnodes('//TestCase/TestingTime')->to_literal; 
+				
 			}#end for
-			$testCaseContent   			.=  builtElements (\%info, \%line, \@caseLines, \@caseFiles);	
+			$testCaseContent   			.=  builtElements (\%info, \%line, \@caseLines, \@caseFiles, $suite, \%testTime );	
 		}#end foreach
 	}#end for	
 		
-  $testCaseContent  		   		.= '</test-framework>';
+  $testCaseContent  		   			.= '</test-framework>';
   
   
 	my $file; 
