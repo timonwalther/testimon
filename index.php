@@ -75,8 +75,6 @@
 	<?php
 	 ini_set('display_errors', 'On');
 	 error_reporting(E_ALL | E_STRICT);
-	 $applikation = 'perl ../../cgi-bin/main.pl';
-     $output = shell_exec($applikation);
 	 //echo $output;
 	
 	?>
