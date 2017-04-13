@@ -32,8 +32,7 @@
 //now you have jquery dependency defined
 }(function ($) {
     "use strict";
-	
-	
+
 	//addendum M&W
 	var GUI_AfterUpload; 
 
@@ -47,7 +46,7 @@
 				this.secondUploadDiv	= '#processUpload';
 				
 				this.testFrameworkName 	= ''; 
-				this.testResult 		= '<table class="table"><thead><tr><th>Case</th><th>Message</th></tr></thead><tbody>';
+				this.testResult 		= ''; 
 				
 				//default badge values
 				this.badgeSubject 		= '<SUBJECT';
@@ -56,7 +55,7 @@
 				this.firstBadgePart 	= '<img src="https://img.shields.io/badge/';
 				
 				//view elements
-				this.headline			= '<h3>Show your test result</h3>',
+				this.headline			= ''; 
 				this.head2fwname		= '';	
 				this.appendment			= ''; 
 				
@@ -122,6 +121,9 @@
 			
 				this.showUploadResult = function()  { 
 						
+					this.headline           = '<h3>Show your test result</h3>';	
+					this.testResult   		= '<table class="table"><thead><tr><th>Case</th><th>Message</th></tr></thead><tbody>'; 	
+						
 					//change view divs	
 					$(this.firstUploadDiv).hide();
 					$(this.secondUploadDiv).show();
@@ -150,6 +152,7 @@
     // fileinput helper object for all global variables and internal helper methods
     //noinspection JSUnresolvedVariable
     $h = {
+		GUI_ONE: 'false', //appendum M&M
         NAMESPACE: '.fileinput',
         MODAL_ID: 'kvFileinputModal',
         FRAMES: '.kv-preview-thumb',
@@ -2623,7 +2626,11 @@
                 $thumb.find('.file-drag-handle').remove();
                 $indicator.css('margin-left', 0);
 				//addendum M&W 
-				GUI_AfterUpload.showUploadResult();
+				if ($h.GUI_ONE == 'false')
+				{ 
+					GUI_AfterUpload.showUploadResult();
+					$h.GUI_ONE = 'true';
+				}
             }
             $indicator.html(config[icon]);
             $indicator.attr('title', config[msg]);
