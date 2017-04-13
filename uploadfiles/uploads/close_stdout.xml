@@ -1,1 +1,0 @@
-<TestLog><TestSuite name="Master Test Suite"><TestCase name="closed" file="close_stdout.cpp" line="27"><Info file="close_stdout.cpp" line="38"><![CDATA[check !ec has passed]]></Info><Info file="close_stdout.cpp" line="43"><![CDATA[check 0 == exit_code has passed]]></Info><TestingTime>44000</TestingTime></TestCase></TestSuite></TestLog>
