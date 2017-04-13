@@ -8,8 +8,13 @@
  * Licensed under the BSD 3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
+ 
+//http://stackoverflow.com/questions/11319034/what-does-function-mean (function)
+// creates an anonymous function, a closure and  
+// runs it without assigning it to a global variable
+
 (function (factory) {
-    "use strict";
+    "use strict";  //means every var has to be well initialized 
     //noinspection JSUnresolvedVariable
     if (typeof define === 'function' && define.amd) { // jshint ignore:line
         // AMD. Register as an anonymous module.
@@ -24,9 +29,119 @@
             factory(window.jQuery);
         }
     }
+//now you have jquery dependency defined
 }(function ($) {
     "use strict";
+	
+	
+	//addendum M&W
+	var GUI_AfterUpload; 
 
+	GUI_AfterUpload = new function () {
+				
+				//path to perl generate format.xml file			
+				this.formatFilePath     = "perlscript/format.xml";
+				
+				//view div containers
+				this.firstUploadDiv 	= '#uploadContainer';	
+				this.secondUploadDiv	= '#processUpload';
+				
+				this.testFrameworkName 	= ''; 
+				this.testResult 		= '<table class="table"><thead><tr><th>Case</th><th>Message</th></tr></thead><tbody>';
+				
+				//default badge values
+				this.badgeSubject 		= '<SUBJECT';
+				this.badgeStatus		= '<STATUS>';
+				this.badgeColor			= '<COLOR>';
+				this.firstBadgePart 	= '<img src="https://img.shields.io/badge/';
+				
+				//view elements
+				this.headline			= '<h3>Show your test result</h3>',
+				this.head2fwname		= '';	
+				this.appendment			= ''; 
+				
+				this.readXmlFormatFile = function ()
+				{
+					var rawFile 	= new XMLHttpRequest();
+					var xmlDoc, parser;
+
+					
+					rawFile.open("GET", this.formatFilePath, false);
+					rawFile.onreadystatechange = function ()
+					{
+						
+						if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0))
+						{	
+								var badge, caseMessage, len;
+					
+								if (window.DOMParser)
+								{	
+									parser 				= new DOMParser();
+									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");									
+								}
+								else // Internet Explorer
+								{
+									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");
+									xmlDoc.async 		= false;
+									xmlDoc.loadXML(rawFile.responseText);
+								}
+								GUI_AfterUpload.testFrameworkName	= xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");
+								len 								= xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length;
+								badge 								= '';
+								caseMessage							= '';
+								
+								for (var i=0; i < len; i++ )
+								{									
+									if (xmlDoc.getElementsByTagName("test-framework")[0].childNodes[i].nodeName == "test-case-passed") {
+									
+										GUI_AfterUpload.badgeSubject 	= "test";
+										GUI_AfterUpload.badgeStatus  	= "passed";
+										GUI_AfterUpload.badgeColor		= "brightgreen";
+										
+										caseMessage 					= xmlDoc.getElementsByTagName("test-framework")[0].childNodes[i].childNodes[0].nodeValue;
+										badge 							= '';
+								
+										if (caseMessage != '') 
+										{	//build badges
+											badge 						+= GUI_AfterUpload.firstBadgePart 
+																	    + 			GUI_AfterUpload.badgeSubject 
+																	    + '-' + 	GUI_AfterUpload.badgeStatus 
+																	    + '-' + 	GUI_AfterUpload.badgeColor
+																	    + '.svg" alt="test passed shield" />';
+
+											GUI_AfterUpload.testResult 	+= '<tr><td>' + badge + '</td><td>' +  caseMessage + '</td></tr>';
+										}
+									} //end if test passed
+								}//end for	
+								GUI_AfterUpload.testResult += '</tbody></table>';
+						}
+					}
+					rawFile.send(null);
+				}//end readXmlFormatFile
+				
+			
+				this.showUploadResult = function()  { 
+						
+					//change view divs	
+					$(this.firstUploadDiv).hide();
+					$(this.secondUploadDiv).show();
+				
+					//read format xml file
+					this.readXmlFormatFile();
+				
+					//build the appendment
+					this.head2fwname		= 	'<h4> Framework:'+ this.testFrameworkName +'</h4>'; 
+					this.appendment  		= 	this.headline + this.head2fwname;
+				    this.appendment 		+= 	this.testResult;
+					
+					//append result to view
+					$(this.secondUploadDiv).append(this.appendment);
+				}
+
+	};
+		
+	//http://stackoverflow.com/questions/4083351/what-does-jquery-fn-mean
+	//fn is alias for prototype in jquery, it adds vars in this case 
     $.fn.fileinputLocales = {};
     $.fn.fileinputThemes = {};
 
@@ -2507,6 +2622,8 @@
             if (status === 'Success') {
                 $thumb.find('.file-drag-handle').remove();
                 $indicator.css('margin-left', 0);
+				//addendum M&W 
+				GUI_AfterUpload.showUploadResult();
             }
             $indicator.html(config[icon]);
             $indicator.attr('title', config[msg]);
@@ -3269,6 +3386,9 @@
         }
     };
 
+	
+	
+	//methods to 
     $.fn.fileinput = function (option) {
         if (!$h.hasFileAPISupport() && !$h.isIE(9)) {
             return;
