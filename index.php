@@ -34,6 +34,11 @@
               </head>
 
 		<body ng-cloak="">
+		
+		<noscript>
+			<p>Da Sie Javascript nicht aktiviert haben, wird die Seite nicht richtig dargestellt! Die Applikation ist ohne Javascript nicht ausführbar.</p>
+		</noscript>
+		
 			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container">
 					<div class="row">
