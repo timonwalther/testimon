@@ -13,12 +13,13 @@ use 	Switch;
 #
 #*
 
-	my  $dir 			=  dir(UPLOADDIR);
-	my  $uploadfile     		=  "";
+	my  $dir 				=  dir(UPLOADDIR);
+	my  $uploadfile     	=  "";
 	my  $json_hash 			=  "";
 	
 	my  @files     			= ();
-	my  @file_content  		= ();
+	my 	%fileContent; 		
+	
 	opendir (DIR, $dir) or die ("There exist no UPLOADDIR!\n");
 	
 	#fill the array with file names
@@ -73,8 +74,8 @@ use 	Switch;
 	
 	foreach my $fil (@files) {
 			$content = $dir->file($fil)->slurp(); #it works only with this temp 
-			push @file_content, $content;
+			$fileContent {$fil} =  $content			
 	}	
 	#this implemented the method in depends 
-	Worker (@file_content);
+	Worker (\%fileContent);
 

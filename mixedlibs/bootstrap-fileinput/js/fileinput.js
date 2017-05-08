@@ -38,8 +38,7 @@
 
     TEST_Tree = new function () {
 
-        this.topInfos           =   [];  
-
+        this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
 
         this.buildFirstLevel = function (root, itemsLen) {
@@ -47,7 +46,8 @@
             var nodeInfo, topName;
 
             topName                 = '';
-            nodeInfo                = '';   
+            nodeInfo                = '';  
+            //caseName                = ''; 
 
             for (var i=0; i < itemsLen; i = i + 2 ) {
 
