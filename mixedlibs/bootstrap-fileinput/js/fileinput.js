@@ -41,69 +41,74 @@
         this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
 
+        this.Infos              =   [];
+
         this.buildFirstLevel = function (root, itemsLen) {
 
-            var nodeInfo, topName;
 
-            topName                 = '';
-            nodeInfo                = '';  
-            //caseName                = ''; 
+            var cases, infos;               
 
-            for (var i=0; i < itemsLen; i = i + 2 ) {
+            var nodeFile, nodeCase, parent, content, caseName, passed;
 
-                    nodeInfo				= root.childNodes[i];  
+            nodeFile                = '';  
+            nodeCase                = '';
+            parent                  = root;
+            content                 = '';
+            passed                  = true;
 
-                    if (nodeInfo.nodeName == "test-case-passed") {      
+            cases                   = [];
+            infos                   = [];
 
-					    if (topName != nodeInfo.getAttribute("file")) {
-											
-								if (typeof nodeInfo.getAttribute("file") != undefined && typeof nodeInfo.getAttribute("type") != undefined) {
-                                   TEST_Tree.topInfos.push({file: nodeInfo.getAttribute("file"), type: nodeInfo.getAttribute("type"), error: false});  
-                                   
-								} // if stuff is there
-                                else {
+            for (var i=0; i < itemsLen; i++ ) {
 
-                                   TEST_Tree.topInfos.push({file: '', type: '', error: true});   
-                                }
-                               
-						}// if caseName is   
-                        topName = nodeInfo.getAttribute("file"); 
+                    nodeFile			    = root.childNodes[i];  
+
+                    if (nodeFile.hasAttributes) {   
+    
+                        if (nodeFile.parentNode != parent.nodeName) {
+                            parent = nodeFile;     
+
+                         }   
+
+                            for (var j= 0; j < nodeFile.childNodes.length; j++) {
+
+                                nodeCase    =  nodeFile.childNodes[j]; 
+
+                                if (nodeCase.hasAttributes) {
+                          
+                                   if (caseName != nodeCase.getAttribute("case")) {
+
+                                     if (j > 0) 
+                                        content += '</tbody></table>';  
+
+                                        caseName = nodeCase.getAttribute("case");
+
+                                        cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") });   
+
+                                        content += '<a href="'+ nodeCase.getAttribute("case") + '">';
+                                        content += nodeCase.getAttribute("case") + '- with time ' + nodeCase.getAttribute("testingTime") + ' - in line ' + nodeCase.getAttribute("caseline") + '</a>';      
+                                        content += '<table class="table"><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+
+                                    }  
+
+
+                                    infos.push ({info:nodeCase.nodeName});    
+                                    nodeCase.nodeName != "test-case-passed" ? passed = false : passed = passed; 
+
+                                    if (passed)      
+                                        content      += '<tr class="success"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';    
+                                    else 
+                                        content     +=  '<tr class="danger"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
+                                
+                                }   
+                            }//end inner for
+
+                            content += '</tbody></table>';
+                            TEST_Tree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed})
+
                     } //end if
-				} //end for
+			    } //end for
         }//end buildFirstLevel    
-
-        this.buildSecondLevel = function (root, itemsLen) {
-
-            var nodeInfo, passed, caseName;
-
-            passed      = true;
-            caseName    = '';
-            nodeInfo    = '';
-
-            for (var i=0; i < itemsLen; i = i + 2 ) {
-
-                    nodeInfo				= root.childNodes[i];     
-
-                    if (nodeInfo.nodeName == "test-case-passed") {     
-
-					    passed && nodeInfo.nodeName == "test-case-not-passed" ? passed = false : passed = passed ;  
-                        
-					    
-                        if (caseName != nodeInfo.getAttribute("case")) {
-											
-								if (typeof nodeInfo.getAttribute("case") != undefined && typeof  nodeInfo.getAttribute("testingTime") != undefined && typeof nodeInfo.getAttribute("caseline") != undefined && passed ) {
-
-                                   TEST_Tree.caseInfos.push({caseName: nodeInfo.getAttribute("case"), testingTime: nodeInfo.getAttribute("testingTime"), caseLine: nodeInfo.getAttribute("caseline"), status: 'passed', error: false });                                                    
-								} // if stuff is there
-                                else {
-
-                                    TEST_Tree.caseInfos.push({caseName: '', testingTime: '', caseLine: '', status: 'none', error: true });
-                                } 
-						}// if caseName is   
-                        caseName = nodeInfo.getAttribute("case");    
-                    } //end if
-				} //end for
-            }//end buildSecondLevel
 
     } //end TEST_Tree object 
 
@@ -134,7 +139,6 @@
 				this.buildBadge 		= function (stat) {
 					
 					var tmp;
-					alert("hier");
 					
 					if (stat == 'passed') {
 						
@@ -150,7 +154,6 @@
 					}
 					return tmp;
 				}
-				
 				
 				
 				this.readXmlFormatFile = function ()
@@ -180,107 +183,37 @@
 								}
 
                                     
-								
-								    var badge, caseMessage, caseName, lineNumber, testingTime, caseNameLine, fileName, type, lenOfCases, passed, root, nodeInfo;
+								    var badge,lenOfCases, root, passedLen, help;
 								
 								    root 								= xmlDoc.getElementsByTagName("test-framework")[0]; 
 								    GUI_AfterUpload.testFrameworkName	= root.getAttribute("name"); //name of the testframework
 								    lenOfCases 							= root.childNodes.length;
-
-                                    var tempTI;
-
-                                    tempTI = '';     
+     
 
                                     TEST_Tree.buildFirstLevel(root,lenOfCases);
-                                    TEST_Tree.buildSecondLevel(root,lenOfCases);
+                                   
+                    
+                                    //begin produce a shield
+                                    passedLen   = TEST_Tree.Infos.length;  
+                                    badge       = '';  
+                                    help        = '';  
 
+                                    while (passedLen > 0 && TEST_Tree.Infos.pass != false) 
+                                        passedLen--;
+                                    
+                                    passedLen == 0 ?  badge = GUI_AfterUpload.buildBadge('passed') : alert('not passed');  
+                                    //end produce a shield    
 
-                                    for (var i = 0; i < TEST_Tree.topInfos.length; i++) {
-                                         tempTI = '<a href="#' + TEST_Tree.topInfos[i].file  +'">' + TEST_Tree.topInfos[i].file + '-' + TEST_Tree.topInfos[i].type + '</a>'   
-                                         alert(tempTI);       
+                                    help = badge + '<ul>';    
 
-                                    }    
+                                    for (var i = 0; i < TEST_Tree.Infos.length; i++) {
 
-
-
-                                    for (var i = 0; i < TEST_Tree.caseInfos.length; i++) {
-                                         tempTI = '<a href="#'  + TEST_Tree.caseInfos[i].caseName +     '">' 
-                                                                + TEST_Tree.caseInfos[i].caseName +     '-' 
-                                                                + TEST_Tree.caseInfos[i].caseLine +     '-' 
-                                                                + TEST_Tree.caseInfos[i].testingTime +  '</a>';   
-                                         alert(tempTI);       
-
-                                    }    
-								
-								    badge 								= '';
-								    
-                                    caseMessage							= ''; //message of case
-								    lineNumber 							= ''; //in which line comes the message
-								    caseName							= ''; //which case name is given  
-								    testingTime							= ''; //how long was the testingTime
-								    caseNameLine						= ''; //in which line stand the caseName
-								    fileName							= ''; //in which file (filename)
-								    type								= ''; //which type of hierachie
-								
-								    passed 								= true; //initial assumption is -> every case is passed 
-								
-								    GUI_AfterUpload.testResult += '<br/><ul>';								
-								
-								    for (var i=0; i < lenOfCases; i = i + 2 ) {
-
-                                        nodeInfo				= root.childNodes[i];     
-
-                                        if (nodeInfo.nodeName == "test-case-passed") {     
-
-									        passed && nodeInfo.nodeName == "test-case-not-passed" ? passed = false : passed = passed ;  
-
-									        if (caseName != nodeInfo.getAttribute("case")) {
-											
-											    if (typeof nodeInfo.getAttribute("case") != undefined && typeof  nodeInfo.getAttribute("testingTime") != undefined && typeof nodeInfo.getAttribute("caseline") != undefined ) {
-											
-												    caseName  				= nodeInfo.getAttribute("case");
-												    testingTime				= nodeInfo.getAttribute("testingTime");
-												    caseNameLine			= nodeInfo.getAttribute("caseline");												
-												    GUI_AfterUpload.testResult += '<li><a href="#' + caseName  +'">' + caseName + '-' + testingTime + '-' + caseNameLine + '</a></li>'; 
-											    }
-									        }
-                                        } //end if
-								    } //end for
-								
-								GUI_AfterUpload.testResult += '</ul>';
-								 
-								 
-								
-								if (passed) 
-									badge += GUI_AfterUpload.buildBadge('passed');
-
-																	
-								GUI_AfterUpload.testResult = badge 
-								+ '<br/>'
-								+ GUI_AfterUpload.testResult 
-								+ '<table class="table"><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>'; 
-								
-                                nodeInfo =  '';
-								
-								for (var i=0; i < lenOfCases; i++ )
-								{		
-                                    nodeInfo  = root.childNodes[i];
-
-									if (nodeInfo.nodeName == "test-case-passed") {
-									
-										
-										caseMessage 					= nodeInfo.childNodes[0].nodeValue;
-										lineNumber                      = nodeInfo.getAttribute("line");
-
-										fileName						= nodeInfo.getAttribute("file");	
-										type							= nodeInfo.getAttribute("type");				
-								
-							
-										GUI_AfterUpload.testResult 	+= '<tr class ="success"><td>' +  caseMessage + '</td><td>' + lineNumber + '</td></tr>';
-										
-									} //end if test passed
-								}//end for	
-								GUI_AfterUpload.testResult += '</tbody></table>';
+                                        help += '<h4> File: ' + TEST_Tree.Infos[i].name + '</h4>'+ TEST_Tree.Infos[i].con +'</li></li>';   
+                                    } 
+                                    help += '</ul>';
+                                    
+                                    GUI_AfterUpload.testResult += help;                                    	
+                                
 						}
 					}
 					rawFile.send(null);
