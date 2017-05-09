@@ -34,9 +34,9 @@
     "use strict";
 
 	//addendum M&W
-	var GUI_AfterUpload, TEST_Tree;
+	var GUIUpTest, TESTTree;
 
-    TEST_Tree = new function () {
+    TESTTree = new function () {
 
         this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
@@ -45,16 +45,18 @@
 
         this.buildFirstLevel = function (root, itemsLen) {
 
-
+            //arrays
             var cases, infos;               
 
+            //single vars
             var nodeFile, nodeCase, parent, content, caseName, passed;
 
             nodeFile                = '';  
             nodeCase                = '';
-            parent                  = root;
             content                 = '';
+            parent                  = root;
             passed                  = true;
+            
 
             cases                   = [];
             infos                   = [];
@@ -85,9 +87,12 @@
 
                                         cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") });   
 
-                                        content += '<a href="'+ nodeCase.getAttribute("case") + '">';
-                                        content += nodeCase.getAttribute("case") + '- with time ' + nodeCase.getAttribute("testingTime") + ' - in line ' + nodeCase.getAttribute("caseline") + '</a>';      
-                                        content += '<table class="table"><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+                                        content += '<a href="' + nodeFile.nodeName + nodeCase.getAttribute("case") + '">';
+                                        content += nodeCase.getAttribute("case") + '- with time ' + nodeCase.getAttribute("testingTime") + ' - in line ' + nodeCase.getAttribute("caseline") + '</a><br/>';      
+                                        content += '<script> $("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href").match(/'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'/))'; 
+                                        content += '{ eventObject.preventDefault(); if ($("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").is(":visible")) { $("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").hide();}';
+                                        content += 'else { $("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").show();}   }}); </script>';
+                                        content += '<table id="tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
 
                                     }  
 
@@ -104,15 +109,21 @@
                             }//end inner for
 
                             content += '</tbody></table>';
-                            TEST_Tree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed})
+                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed})
 
                     } //end if
 			    } //end for
         }//end buildFirstLevel    
 
-    } //end TEST_Tree object 
 
-	GUI_AfterUpload = new function () {
+        this.toogleElements = function ( ) {
+
+
+        }    
+
+    } //end TESTTree object 
+
+	GUIUpTest = new function () {
 				
 				//path to perl generate format.xml file			
 				this.formatFilePath     = "perlscript/format.xml";
@@ -129,6 +140,7 @@
 				this.badgeStatus		= '<STATUS>';
 				this.badgeColor			= '<COLOR>';
 				this.firstBadgePart 	= '<img src="https://img.shields.io/badge/';
+                this.lastBadgePart      = '.svg" alt="test shield" />';
 				
 				//view elements
 				this.headline			= ''; 
@@ -136,23 +148,30 @@
 				this.appendment			= ''; 
 				
                 //build the badge shield     
-				this.buildBadge 		= function (stat) {
+				this.buildBadge 		= function (array) {
 					
-					var tmp;
+                   var passedLength, tmp;
+
+                        passedLength = array.length;
+
+                        while (passedLength > 0 && array.pass != false) 
+                                passedLength--; 
+
+					    if (passedLength == 0) {        //every case is successfully passed
+						
+						    GUIUpTest.badgeSubject 	    = "test";
+						    GUIUpTest.badgeStatus  	    = "passed";
+						    GUIUpTest.badgeColor		= "brightgreen";
+                            GUIUpTest.lastBadgePart     = '.svg" alt="test passed shield" />';     
+                        }	
+
+					    tmp =   GUIUpTest.firstBadgePart 
+						    + 			GUIUpTest.badgeSubject 
+							+ '-' + 	GUIUpTest.badgeStatus 
+							+ '-' + 	GUIUpTest.badgeColor
+						    +           GUIUpTest.lastBadgePart;	
 					
-					if (stat == 'passed') {
-						
-						GUI_AfterUpload.badgeSubject 	= "test";
-						GUI_AfterUpload.badgeStatus  	= "passed";
-						GUI_AfterUpload.badgeColor		= "brightgreen";
-						
-					tmp =   GUI_AfterUpload.firstBadgePart 
-						    + 			GUI_AfterUpload.badgeSubject 
-							+ '-' + 	GUI_AfterUpload.badgeStatus 
-							+ '-' + 	GUI_AfterUpload.badgeColor
-						    + '.svg" alt="test passed shield" />';	
-					}
-					return tmp;
+					    return tmp;
 				}
 				
 				
@@ -181,38 +200,23 @@
 									xmlDoc.async 		= false;
 									xmlDoc.loadXML(rawFile.responseText);
 								}
-
                                     
-								    var badge,lenOfCases, root, passedLen, help;
+								    var badge, root;
 								
-								    root 								= xmlDoc.getElementsByTagName("test-framework")[0]; 
-								    GUI_AfterUpload.testFrameworkName	= root.getAttribute("name"); //name of the testframework
-								    lenOfCases 							= root.childNodes.length;
+								    root 								= xmlDoc.getElementsByTagName("test-framework")[0]; //got first element
+                                    GUIUpTest.testFrameworkName	        = root.getAttribute("name");                        //name of the testframework
      
-
-                                    TEST_Tree.buildFirstLevel(root,lenOfCases);
-                                   
-                    
-                                    //begin produce a shield
-                                    passedLen   = TEST_Tree.Infos.length;  
-                                    badge       = '';  
-                                    help        = '';  
-
-                                    while (passedLen > 0 && TEST_Tree.Infos.pass != false) 
-                                        passedLen--;
+                                    TESTTree.buildFirstLevel(root,root.childNodes.length);
                                     
-                                    passedLen == 0 ?  badge = GUI_AfterUpload.buildBadge('passed') : alert('not passed');  
-                                    //end produce a shield    
+                                    badge       =  GUIUpTest.buildBadge(TESTTree.Infos);                                    //produce a shield 
 
-                                    help = badge + '<ul>';    
+                                    GUIUpTest.testResult += badge + '<ul>';    
 
-                                    for (var i = 0; i < TEST_Tree.Infos.length; i++) {
+                                    for (var i = 0; i < TESTTree.Infos.length; i++) {
 
-                                        help += '<h4> File: ' + TEST_Tree.Infos[i].name + '</h4>'+ TEST_Tree.Infos[i].con +'</li></li>';   
+                                        GUIUpTest.testResult += '<h4> File: ' + TESTTree.Infos[i].name + '</h4><li>'+ TESTTree.Infos[i].con +'</li>';   
                                     } 
-                                    help += '</ul>';
-                                    
-                                    GUI_AfterUpload.testResult += help;                                    	
+                                    GUIUpTest.testResult += '</ul>';                                                  	
                                 
 						}
 					}
@@ -2730,7 +2734,7 @@
 				//addendum M&W 
 				if ($h.GUI_ONE == 'false')
 				{ 
-					GUI_AfterUpload.showUploadResult();
+					GUIUpTest.showUploadResult();
 					$h.GUI_ONE = 'true';
 				}
             }
