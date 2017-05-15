@@ -49,11 +49,12 @@
             var cases, infos;               
 
             //single vars
-            var nodeFile, nodeCase, parent, content, caseName, passed;
+            var nodeFile, nodeCase, parent, content, caseName, fileName, passed;
 
             nodeFile                = '';  
             nodeCase                = '';
             content                 = '';
+            fileName                = '';    
             parent                  = root;
             passed                  = true;
             
@@ -75,6 +76,7 @@
                             for (var j= 0; j < nodeFile.childNodes.length; j++) {
 
                                 nodeCase    =  nodeFile.childNodes[j]; 
+                                fileName    =  nodeFile.nodeName;
 
                                 if (nodeCase.hasAttributes) {
                           
@@ -85,19 +87,20 @@
 
                                         caseName = nodeCase.getAttribute("case");
 
+                                        //fill the array of testcases        
                                         cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") });   
 
-                                        content += '<a href="' + nodeFile.nodeName + nodeCase.getAttribute("case") + '">';
-                                        content += nodeCase.getAttribute("case") + '- with time ' + nodeCase.getAttribute("testingTime") + ' - in line ' + nodeCase.getAttribute("caseline") + '</a><br/>';      
-                                        content += '<script> $("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href").match(/'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'/))'; 
-                                        content += '{ eventObject.preventDefault(); if ($("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").is(":visible")) { $("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").hide();}';
-                                        content += 'else { $("#tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'").show();}   }}); </script>';
-                                        content += '<table id="tab'+ nodeFile.nodeName + nodeCase.getAttribute("case") +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+                                        content += '<a href="' + fileName + caseName + '">';
+                                        content += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' + nodeCase.getAttribute("caseline") + '</a><br/>';      
+                                        content += '<script> $("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href").match(/'+ fileName + caseName +'/))'; 
+                                        content += '{ eventObject.preventDefault(); if ($("#tab'+ fileName + caseName +'").is(":visible")) { $("#tab'+ fileName + caseName +'").hide();}';
+                                        content += 'else { $("#tab'+ fileName + caseName +'").show();}   }}); </script>';
+                                        content += '<table id="tab'+ fileName + caseName +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
 
                                     }  
 
-
-                                    infos.push ({info:nodeCase.nodeName});    
+                                    //fill the array of elements whose are maybe "test-case-passed" or "test-case-not-passed"    
+                                    infos.push ({info: nodeCase.nodeName});    
                                     nodeCase.nodeName != "test-case-passed" ? passed = false : passed = passed; 
 
                                     if (passed)      
@@ -109,9 +112,9 @@
                             }//end inner for
 
                             content += '</tbody></table>';
-                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed})
-
+                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed});
                     } //end if
+                    content = '';
 			    } //end for
         }//end buildFirstLevel    
 
@@ -147,6 +150,29 @@
 				this.head2fwname		= '';	
 				this.appendment			= ''; 
 				
+
+                this.getColor           = function (endLen, wholeLen) {
+
+                    var quot;
+                    quot                = (wholeLen / endLen) * 100;   
+
+                    if (quot == 100)                         
+                        return "red";
+
+                    if (quot < 100 && quot >= 60)
+                        return "orange";
+ 
+                    if (quot < 60 && quot >= 30 )
+                        return "yellow";
+
+                    if (quot < 30 && quot >= 10 )
+                        return "yellowgreen";
+
+                    if (quot < 10 && quot > 0)
+                        return "green";
+                } //getColor
+
+
                 //build the badge shield     
 				this.buildBadge 		= function (array) {
 					
@@ -157,13 +183,20 @@
                         while (passedLength > 0 && array.pass != false) 
                                 passedLength--; 
 
+                         GUIUpTest.badgeSubject 	    = "test";           
+
 					    if (passedLength == 0) {        //every case is successfully passed
 						
-						    GUIUpTest.badgeSubject 	    = "test";
 						    GUIUpTest.badgeStatus  	    = "passed";
 						    GUIUpTest.badgeColor		= "brightgreen";
                             GUIUpTest.lastBadgePart     = '.svg" alt="test passed shield" />';     
                         }	
+                        else {
+                            GUIUpTest.badgeStatus  	    = "not passed";    
+                            GUIUpTest.badgeColor        = GUIUpTest.getColor(passedLength, array.length);      
+                            GUIUpTest.lastBadgePart     = '.svg" alt="test not passed shield" />';      
+                        }
+
 
 					    tmp =   GUIUpTest.firstBadgePart 
 						    + 			GUIUpTest.badgeSubject 
@@ -208,7 +241,7 @@
      
                                     TESTTree.buildFirstLevel(root,root.childNodes.length);
                                     
-                                    badge       =  GUIUpTest.buildBadge(TESTTree.Infos);                                    //produce a shield 
+                                    badge       = 'Branch: ' +  GUIUpTest.buildBadge(TESTTree.Infos);                                    //produce a shield 
 
                                     GUIUpTest.testResult += badge + '<ul>';    
 
