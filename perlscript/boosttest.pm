@@ -7,14 +7,10 @@
 
 use 		strict;
 use 		constant FRAMEWORK 	=> "boosttest"; 
+use 		Switch;
 
 require 	"dependency.pm"; #this source holds every dependency
- 
- 
-#** @method builtElements
-#   
-#* 
-
+  
 
 #delete whitespaces of a value
 sub withoutWhitespaces  {
@@ -37,8 +33,68 @@ sub getOnlyValueOfAttr {
 	return $attrValue ;
 }
 
+#build an attribute with value and name 
+sub buildAttribute {
 
- 
+	my $attrName 		= shift();
+    my $attrValue		= shift();
+		
+	return $attrName.'="'.$attrValue.'"';  	
+}
+
+
+sub buildElementTestPassed {
+
+    my $result 		= '<test-case-passed';
+	return $result;
+}
+
+#build special element
+sub getFileElement {
+
+		my $result 		= shift();
+		
+		if ($result =~ /.xml/) {
+		
+			#delete dot and suffix
+			$result =~ s/.xml//;
+		} 		
+	
+		return '<'.$result.' type="file">';
+}
+
+
+
+#method which sends 
+sub getXPathQuery {
+
+	my $key 		= shift();	
+	#get the query keyword
+	my $argument	=  shift(); 
+
+	switch ($argument) {
+	
+		case "info" 
+		{
+			return '//TestCase[@name=\''.$key.'\']/Info';
+		}
+		case "infoline"
+		{		
+			return '//TestCase[@name=\''.$key.'\']/Info/@line';
+		}
+		case "testtime"
+		{
+			return '//TestCase[@name=\''.$key.'\']/TestingTime/text()';
+		}	
+		else
+		{
+			print "There occours a query mistake!\n";
+			return "";
+		}   
+	} 
+}
+
+
 sub builtElements {
 	
 	my %testCaseInfoInit		= %{shift()};   	#get first argument
@@ -52,7 +108,7 @@ sub builtElements {
 	
 	my $info;
 	my $testTime;
-	my $case;
+	my $caseName;
 	my $caseLine;  
 	my $caseFile;
 	
@@ -63,13 +119,13 @@ sub builtElements {
 		
 			$info			 	= "";	
 			
-			$case 				= 'case="'.$key.'"';
+			$caseName 			= buildAttribute('case', $key); 
 			$caseLine			= @caseLines[$lineIndex];
 			$caseFile			= @caseFiles[$lineIndex];
 			$caseLine			= 'case'.$caseLine;
 			
 			$testTime       	= $testCaseTestingTime{$key};		
-			$testTime 			= 'testingTime="'.$testTime.'"';
+			$testTime 			= buildAttribute('testingTime',$testTime); 
 			
 			$lineIndex++;
 			
@@ -78,9 +134,10 @@ sub builtElements {
 			#go trough the hash entry by entry 
 			for (my $i = 0; $i < scalar @{$testCaseInfoInit{$key}}; $i++) {
 			
-				$info 		=  @{$testCaseInfoInit{$key}}[$i]->to_literal;
 			
-				$info = withoutWhitespaces ($info);
+				#get the info string in the right shape (without Whitespaces and as an string)
+				$info 		=  	@{$testCaseInfoInit{$key}}[$i]->to_literal;
+				$info 		= 	withoutWhitespaces ($info);
 			
 					#HINT could add more cases 
 					#CASE check haspassed
@@ -90,7 +147,7 @@ sub builtElements {
 						$info =~ s/check//;
 						$info =~ s/haspassed//;
 					
-						$info = '<test-case-passed '.@{$testCaseInfoLine{$key}}[$i].' '.$case.' '.$caseLine.' '.$caseFile.' '.$testTime.'>'.$info.'</test-case-passed>' ;
+						$info = '<test-case-passed '.@{$testCaseInfoLine{$key}}[$i].' '.$caseName.' '.$caseLine.' '.$caseFile.' '.$testTime.'>'.$info.'</test-case-passed>' ;
 						push @testCaseInfoResult, $info;
 					}
 				}#for end			
@@ -110,7 +167,8 @@ sub Worker {
     my $parser     			= XML::LibXML->new();
     my $test;
 	my $key;
-	my $tempKey;
+	my $caseName;
+ 
  
 	my %fileContent;
 	%fileContent =  %{shift()};
@@ -122,11 +180,9 @@ sub Worker {
 		#   take one argument (the content of a file) 
 		#*
 				
-		$test   				= $parser->parse_string($fileContent{$key});
-		
-		$tempKey 				= $key;
-		$tempKey 				=~ s/.xml//; 					#delete dot and suffix
-		$testCaseContent 		.= '<'.$tempKey.' type="file">';
+		$test   				= 	$parser->parse_string($fileContent{$key});
+	
+		$testCaseContent 		.=  getFileElement($key);  
 		 
 		foreach my $case ($test->findnodes('/TestLog/TestSuite')) {
   		
@@ -142,25 +198,20 @@ sub Worker {
 					
 				for (my $j = 0; $j < scalar @caseNames; $j++) {
 		
-					@caseNames[$j] = getOnlyValueOfAttr (@caseNames[$j], 'name');
+					$caseName = getOnlyValueOfAttr (@caseNames[$j], 'name');
 		
 				    #for every case name look for the infos
-				    my $query 						= '//TestCase[@name=\''.@caseNames[$j].'\']/Info';
-				    $info{@caseNames[$j]} 	 		= $case->findnodes($query); 						#fills the %info  var
+				    $info{$caseName} 	 		= $case->findnodes(getXPathQuery($caseName,'info')); 		#fills the %info  var
 				    #for every info look for the line attribute
-				    $query  		    			= '//TestCase[@name=\''.@caseNames[$j].'\']/Info/@line';
-				    $line{@caseNames[$j]}    		= $case->findnodes($query);							#fills the %line var
+				    $line{$caseName}    		= $case->findnodes(getXPathQuery($caseName,'infoline'));	#fills the %line var
 				    #for every case name look for the testing Time
-				    $query 							= '//TestCase[@name=\''.@caseNames[$j].'\']/TestingTime/text()';
-				    $testTime{@caseNames[$j]} 		=  $case->findnodes($query);						#fills the %testTime var 
-				    
-				    $query 							= ''
+				    $testTime{$caseName} 		= $case->findnodes(getXPathQuery($caseName,'testtime'));	#fills the %testTime var 
 				    
 				   
 			}#end for
 			$testCaseContent   .=  builtElements (\%info, \%line, \%testTime, \@caseLines, \@caseFiles);	
 		}#end foreach
-		$testCaseContent 		.= '</'.$tempKey.'>';
+		$testCaseContent 		.= '</'.getFileElement($key).'>';
 	}#end foreach	
 		
 	$testCaseContent  	.= '</test-framework>';

@@ -27,3 +27,5 @@ sub returnValueDependency {
 return 1;
 }
 my $returnValueRequire = returnValueDependency ();
+
+%INC

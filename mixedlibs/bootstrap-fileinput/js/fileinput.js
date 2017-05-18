@@ -34,13 +34,26 @@
     "use strict";
 
 	//addendum M&W
-	var GUIUpTest, TESTTree;
+	var Iterator, GUIUpTest, TESTTree;
+
+    Iterator  = function () {
+
+    this.makeIterator = function (array){
+            var nextIndex = 0;
+            return {
+                next: function(){
+                    return nextIndex < array.length ?
+                        {value: array[nextIndex++], done: false} :
+                        {done: true};
+                        }
+                    }
+            } //end makeIterator
+    }//Iterator 
 
     TESTTree = new function () {
 
         this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
-
         this.Infos              =   [];
 
         this.buildFirstLevel = function (root, itemsLen) {
@@ -72,7 +85,7 @@
                             parent = nodeFile;     
 
                          }   
-
+                            //for every file element look for the testcases and testcaseinfos
                             for (var j= 0; j < nodeFile.childNodes.length; j++) {
 
                                 nodeCase    =  nodeFile.childNodes[j]; 
@@ -82,8 +95,8 @@
                           
                                    if (caseName != nodeCase.getAttribute("case")) {
 
-                                     if (j > 0) 
-                                        content += '</tbody></table>';  
+                                        //new caseName and not the first one, then close table element
+                                        j > 0 ?  content += '</tbody></table>': content = content;  
 
                                         caseName = nodeCase.getAttribute("case");
 
@@ -114,15 +127,12 @@
                             content += '</tbody></table>';
                             TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed});
                     } //end if
+
+                    //unset the content var 
                     content = '';
+
 			    } //end for
-        }//end buildFirstLevel    
-
-
-        this.toogleElements = function ( ) {
-
-
-        }    
+        }//end buildFirstLevel      
 
     } //end TESTTree object 
 
@@ -153,23 +163,29 @@
 
                 this.getColor           = function (endLen, wholeLen) {
 
-                    var quot;
-                    quot                = (wholeLen / endLen) * 100;   
+                    var quot, proof;
+                    
+                    quot            = (wholeLen / endLen) * 100;   
+                    proof           = (quot == 100);
 
-                    if (quot == 100)                         
-                        return "red";
+                    switch (proof) {
 
-                    if (quot < 100 && quot >= 60)
-                        return "orange";
- 
-                    if (quot < 60 && quot >= 30 )
-                        return "yellow";
+                            case true : return "red" ;
 
-                    if (quot < 30 && quot >= 10 )
-                        return "yellowgreen";
+                            case false : proof = (quot < 100 && quot >= 60);
 
-                    if (quot < 10 && quot > 0)
-                        return "green";
+                            case true: return "orange";
+
+                            case false: proof =  (quot < 60 && quot >= 30 );
+
+                            case true: return "yellow";
+
+                            case false: proof = (quot < 30 && quot >= 10 );
+
+                            case true: return "yellowgreen";        
+
+                            default: return "green";
+                    }
                 } //getColor
 
 
@@ -185,20 +201,22 @@
 
                          GUIUpTest.badgeSubject 	    = "test";           
 
-					    if (passedLength == 0) {        //every case is successfully passed
+                            //every case is successfully passed
+					        if (passedLength == 0) {       
 						
-						    GUIUpTest.badgeStatus  	    = "passed";
-						    GUIUpTest.badgeColor		= "brightgreen";
-                            GUIUpTest.lastBadgePart     = '.svg" alt="test passed shield" />';     
-                        }	
-                        else {
-                            GUIUpTest.badgeStatus  	    = "not passed";    
-                            GUIUpTest.badgeColor        = GUIUpTest.getColor(passedLength, array.length);      
-                            GUIUpTest.lastBadgePart     = '.svg" alt="test not passed shield" />';      
-                        }
+						        GUIUpTest.badgeStatus  	    = "passed";
+						        GUIUpTest.badgeColor		= "brightgreen";
+                                GUIUpTest.lastBadgePart     = '.svg" alt="test passed shield" />';     
+                            }
+                            //some cases are not passed	
+                            else {
+                                GUIUpTest.badgeStatus  	    = "not passed";    
+                                GUIUpTest.badgeColor        = GUIUpTest.getColor(passedLength, array.length);      
+                                GUIUpTest.lastBadgePart     = '.svg" alt="test not passed shield" />';      
+                            }
 
-
-					    tmp =   GUIUpTest.firstBadgePart 
+                            //build badge
+					        tmp =   GUIUpTest.firstBadgePart 
 						    + 			GUIUpTest.badgeSubject 
 							+ '-' + 	GUIUpTest.badgeStatus 
 							+ '-' + 	GUIUpTest.badgeColor
@@ -207,68 +225,77 @@
 					    return tmp;
 				}
 				
-				
+
+				//http://stackoverflow.com/questions/4249030/load-javascript-async-then-check-dom-loaded-before-executing-callback
 				this.readXmlFormatFile = function ()
 				{
 					
-					var rawFile 	= new XMLHttpRequest();
-					var xmlDoc, parser;
+					var rawFile,xmlDoc, parser;
 
+					rawFile = new XMLHttpRequest();
 					
+					//false -> synchron request  - true asynchron request
+                    //https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
 					rawFile.open("GET", this.formatFilePath, false);
-					rawFile.onreadystatechange = function ()
+					rawFile.onreadystatechange = function (e)
 					{
 						
 						if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0))
-						{	
-								
+						{		
+
 								if (window.DOMParser)
-								{	
+								{
 									parser 				= new DOMParser();
-									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");									
+									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");	
+    
 								}
 								else // Internet Explorer
 								{
 									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");
-									xmlDoc.async 		= false;
+									xmlDoc.async 		= true;
 									xmlDoc.loadXML(rawFile.responseText);
 								}
                                     
-								    var badge, root;
-								
-								    root 								= xmlDoc.getElementsByTagName("test-framework")[0]; //got first element
-                                    GUIUpTest.testFrameworkName	        = root.getAttribute("name");                        //name of the testframework
-     
-                                    TESTTree.buildFirstLevel(root,root.childNodes.length);
+                                    //name of the testframework
+                                    GUIUpTest.testFrameworkName	        = xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");                        
                                     
-                                    badge       = 'Branch: ' +  GUIUpTest.buildBadge(TESTTree.Infos);                                    //produce a shield 
+                                    alert (GUIUpTest.testFrameworkName);
+                                    //got first element
+                                    TESTTree.buildFirstLevel(xmlDoc.getElementsByTagName("test-framework")[0],xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
+                                           
+                                    //produce a shield    
+                                    GUIUpTest.testResult    += 'Branch: ' +  GUIUpTest.buildBadge(TESTTree.Infos);  
 
-                                    GUIUpTest.testResult += badge + '<ul>';    
-
+                    
+                                    GUIUpTest.testResult    +=  '<ul>';     
                                     for (var i = 0; i < TESTTree.Infos.length; i++) {
-
                                         GUIUpTest.testResult += '<h4> File: ' + TESTTree.Infos[i].name + '</h4><li>'+ TESTTree.Infos[i].con +'</li>';   
                                     } 
-                                    GUIUpTest.testResult += '</ul>';                                                  	
-                                
+                                    GUIUpTest.testResult    += '</ul>';  
+
 						}
-					}
+                        else {
+                                    console.error(rawFile.statusText);          
+                        }
+					};
+                    rawFile.onerror = function (e) {
+                        console.error(rawFile.statusText);
+                    };    
+
 					rawFile.send(null);
 				}//end readXmlFormatFile
 				
 			
 				this.showUploadResult = function()  { 
 						
+                    //read format xml file
+					this.readXmlFormatFile();    
+
 					this.headline           = '<h3>Show your test result</h3>';	
-					//this.testResult       = ''; 	
 						
 					//change view divs	
 					$(this.firstUploadDiv).hide();
 					$(this.secondUploadDiv).show();
-				
-
-					//read format xml file
-					this.readXmlFormatFile();
 				
 					//build the appendment
 					this.head2fwname		= 	'<h4> Framework:'+ this.testFrameworkName +'</h4>'; 
