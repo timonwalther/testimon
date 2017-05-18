@@ -23,15 +23,15 @@ sub withoutWhitespaces  {
 #get only the value without any quotes 
 sub getOnlyValueOfAttr {
 
-	my $attrValue 		= shift;
 	my $attrName 		= shift;
-	 
+	my $attrValue 		= shift;
+ 
 	$attrValue 			=~ s/$attrName=//; 			#delete attributename	
 	while ($attrValue 	=~ s/"//) {} 				#delete  "" 
 	$attrValue 			=~ s/\s//;					#delete  whitespaces
 	
 	return $attrValue ;
-}
+}# getOnlyValueOfAttr
 
 #build an attribute with value and name 
 sub buildAttribute {
@@ -40,59 +40,53 @@ sub buildAttribute {
     my $attrValue		= shift();
 		
 	return $attrName.'="'.$attrValue.'"';  	
-}
+}#end buildAttribute
 
 
 sub buildElementTestPassed {
 
     my $result 		= '<test-case-passed';
 	return $result;
-}
+}#end buildElementTestPassed
 
-#build special element
-sub getFileElement {
+#build special element - #one argument
+sub getFileElement {  
 
 		my $result 		= shift();
 		
 		if ($result =~ /.xml/) {
-		
 			#delete dot and suffix
 			$result =~ s/.xml//;
-		} 		
-	
-		return '<'.$result.' type="file">';
-}
+			return '<'.$result.' type="file">';
+		} 			
+}#end getFileElement
 
 
 
 #method which sends 
 sub getXPathQuery {
 
-	my $key 		= shift();	
+	my $caseName 	= 	shift();	
 	#get the query keyword
-	my $argument	=  shift(); 
+	my $selector	=  	shift(); 
 
-	switch ($argument) {
+	switch ($selector) {
 	
-		case "info" 
-		{
-			return '//TestCase[@name=\''.$key.'\']/Info';
+		case "info" 	{
+			return '//TestCase[@name=\''.$caseName.'\']/Info';
 		}
-		case "infoline"
-		{		
-			return '//TestCase[@name=\''.$key.'\']/Info/@line';
+		case "infoline" {		
+			return '//TestCase[@name=\''.$caseName.'\']/Info/@line';
 		}
-		case "testtime"
-		{
-			return '//TestCase[@name=\''.$key.'\']/TestingTime/text()';
+		case "testtime" {
+			return '//TestCase[@name=\''.$caseName.'\']/TestingTime/text()';
 		}	
-		else
-		{
+		else			{
 			print "There occours a query mistake!\n";
 			return "";
 		}   
 	} 
-}
+}#end getXPathQuery
 
 
 sub builtElements {
@@ -198,7 +192,7 @@ sub Worker {
 					
 				for (my $j = 0; $j < scalar @caseNames; $j++) {
 		
-					$caseName = getOnlyValueOfAttr (@caseNames[$j], 'name');
+					$caseName = getOnlyValueOfAttr ('name', @caseNames[$j]);
 		
 				    #for every case name look for the infos
 				    $info{$caseName} 	 		= $case->findnodes(getXPathQuery($caseName,'info')); 		#fills the %info  var
