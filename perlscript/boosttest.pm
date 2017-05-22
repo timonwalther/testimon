@@ -6,12 +6,20 @@
 #* 
 
 use 		strict;
-use 		constant FRAMEWORK 	=> "boosttest"; 
+use 		warnings;
+
+#use constants
+use 		constant FRAMEWORK 			=> "boosttest"; 
+use 		constant ROOTXMLELEMENT 	=> '<?xml version="1.0"?><test-framework name="'.FRAMEWORK.'">';
+use 		constant CLOSEROOTELEMENT	=> '</test-framework>';
+
+
+#use constructs 
 use 		Switch;
 
 require 	"dependency.pm"; #this source holds every dependency
   
-
+  
 #delete whitespaces of a value
 sub withoutWhitespaces  {
 
@@ -53,12 +61,20 @@ sub buildElementTestPassed {
 sub getFileElement {  
 
 		my $result 		= shift();
+		my $type 		= shift();
 		
 		if ($result =~ /.xml/) {
 			#delete dot and suffix
 			$result =~ s/.xml//;
-			return '<'.$result.' type="file">';
-		} 			
+			
+			if ($type eq "close") {
+				return '</'.$result.'>';	
+			}
+			
+			if ($type eq "open") {
+				return '<'.$result.' type="file">';
+			}
+		}		
 }#end getFileElement
 
 
@@ -114,9 +130,8 @@ sub builtElements {
 			$info			 	= "";	
 			
 			$caseName 			= buildAttribute('case', $key); 
-			$caseLine			= @caseLines[$lineIndex];
-			$caseFile			= @caseFiles[$lineIndex];
-			$caseLine			= 'case'.$caseLine;
+			$caseLine			= withoutWhitespaces ('case'.$caseLines[$lineIndex]);
+			$caseFile			= $caseFiles[$lineIndex];
 			
 			$testTime       	= $testCaseTestingTime{$key};		
 			$testTime 			= buildAttribute('testingTime',$testTime); 
@@ -157,12 +172,12 @@ sub Worker {
 
     print "Worker out of Boost Test\n";
   
-    my $testCaseContent 	= '<?xml version="1.0"?><test-framework name="'.FRAMEWORK.'">';
+    my $result 				= ROOTXMLELEMENT; 
     my $parser     			= XML::LibXML->new();
-    my $test;
+    
+	my $test;
 	my $key;
 	my $caseName;
- 
  
 	my %fileContent;
 	%fileContent =  %{shift()};
@@ -176,7 +191,7 @@ sub Worker {
 				
 		$test   				= 	$parser->parse_string($fileContent{$key});
 	
-		$testCaseContent 		.=  getFileElement($key);  
+		$result			 		.=  getFileElement($key, 'open');  
 		 
 		foreach my $case ($test->findnodes('/TestLog/TestSuite')) {
   		
@@ -192,7 +207,7 @@ sub Worker {
 					
 				for (my $j = 0; $j < scalar @caseNames; $j++) {
 		
-					$caseName = getOnlyValueOfAttr ('name', @caseNames[$j]);
+					$caseName = getOnlyValueOfAttr ('name', $caseNames[$j]);
 		
 				    #for every case name look for the infos
 				    $info{$caseName} 	 		= $case->findnodes(getXPathQuery($caseName,'info')); 		#fills the %info  var
@@ -203,13 +218,12 @@ sub Worker {
 				    
 				   
 			}#end for
-			$testCaseContent   .=  builtElements (\%info, \%line, \%testTime, \@caseLines, \@caseFiles);	
+			$result 	   .=  builtElements (\%info, \%line, \%testTime, \@caseLines, \@caseFiles);	
 		}#end foreach
-		$testCaseContent 		.= '</'.getFileElement($key).'>';
+		$result  		.= getFileElement($key, 'close');
 	}#end foreach	
 		
-	$testCaseContent  	.= '</test-framework>';
-  
+	$result   	.= CLOSEROOTELEMENT;
   
 	my $file; 
 	
@@ -217,9 +231,12 @@ sub Worker {
 	if (touch('format.xml')) {   
 		#write the testCaseContent to new file 
 		$file = file('format.xml');
-		$file->spew( $testCaseContent  );
+		$file->spew( $result );
 	}	
 }
+
+
+
 
 #it is only for working in general
 sub returnValue {

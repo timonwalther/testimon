@@ -12,7 +12,7 @@ describe("GUIUpTest", function() {
          
         //Spec for sum operation
         it("should be able to get the right color", function() {
-            expect($.GUIUpTest.getColor(52,0)).toEqual("red");
+            expect(GUIUpTest.getColor(52,0)).toEqual("red");
         }).toThrowError(Error);;
          
     });

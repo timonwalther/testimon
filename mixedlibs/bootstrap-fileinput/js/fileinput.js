@@ -33,6 +33,8 @@
 }(function ($) {
     "use strict";
 
+
+    /*
 	//addendum M&W
 	var Iterator, GUIUpTest, TESTTree;
 
@@ -307,6 +309,7 @@
 				}
 
 	};
+    */
 		
 	//http://stackoverflow.com/questions/4083351/what-does-jquery-fn-mean
 	//fn is alias for prototype in jquery, it adds vars in this case 

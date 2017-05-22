@@ -87,6 +87,7 @@
   <script src="mixedlibs/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"></script>
   <script src="mixedlibs/bootstrap-fileinput/js/plugins/sortable.min.js"></script>
   <script src="mixedlibs/bootstrap-fileinput/js/plugins/purify.min.js"></script>
+  <script src="js/extended.js"></script>
   <script src="mixedlibs/bootstrap-fileinput/js/fileinput.js"></script>
   <script src="mixedlibs/bootstrap-fileinput/themes/explorer/theme.js"></script>
   
