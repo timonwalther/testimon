@@ -23,6 +23,10 @@
         this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
         this.Infos              =   [];
+		
+		
+		this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
+		this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	
 
         this.buildFirstLevel = function (root, itemsLen) {
 
@@ -30,12 +34,13 @@
             var cases, infos;               
 
             //single vars
-            var nodeFile, nodeCase, parent, content, caseName, fileName, passed;
+            var nodeFile, nodeCase, parent, content, caseName, fileName, passed, id;
 
             nodeFile                = '';  
             nodeCase                = '';
             content                 = '';
-            fileName                = '';    
+            fileName                = '';  
+			id 						= '';	
             parent                  = root;
             passed                  = true;
             
@@ -69,14 +74,18 @@
                                         caseName = nodeCase.getAttribute("case");
 
                                         //fill the array of testcases        
-                                        cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") });   
+                                        cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") }); 
 
-                                        content += '<a href="' + fileName + caseName + '">';
-                                        content += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' + nodeCase.getAttribute("caseline") + '</a><br/>';      
-                                        content += '<script> $("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href").match(/'+ fileName + caseName +'/))'; 
-                                        content += '{ eventObject.preventDefault(); if ($("#tab'+ fileName + caseName +'").is(":visible")) { $("#tab'+ fileName + caseName +'").hide();}';
-                                        content += 'else { $("#tab'+ fileName + caseName +'").show();}   }}); </script>';
-                                        content += '<table id="tab'+ fileName + caseName +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+										id 		= 	fileName + caseName;
+
+                                        content += '<a href="' + id + '">';
+                                        content += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' 
+												+ nodeCase.getAttribute("caseline") + '</a><br/>';  
+												
+                                        content += '<script>' + TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault; 
+                                        content += 'if ($("#tab'+ id +'").is(":visible")) { $("#tab'+ id +'").hide();}';
+                                        content += 'else { $("#tab'+ id +'").show();}   }}); </script>';
+                                        content += '<table id="tab'+ id +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
                                     }
 
 
@@ -125,7 +134,6 @@
 				
 				//view elements
 				this.headline			= ''; 
-				this.head2fwname		= '';	
 				this.appendment			= ''; 
 				
 
@@ -224,21 +232,49 @@
 									xmlDoc.loadXML(rawFile.responseText);
 								}
                                     
+									var temp, id;
+									temp = ''; 
+									id = '';
                                     //name of the testframework
                                     GUIUpTest.testFrameworkName	        = xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");                        
                                     
                                     //got first element
                                     TESTTree.buildFirstLevel(xmlDoc.getElementsByTagName("test-framework")[0],xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
                                            
-                                    //produce a shield    
-                                    GUIUpTest.testResult    += 'Branch: ' +  GUIUpTest.buildBadge(TESTTree.Infos);  
+									  for (var i = 0; i < TESTTree.Infos.length; i++) {
+									
+                                        temp += '<h4> File: ' + TESTTree.Infos[i].name + '</h4>'+ TESTTree.Infos[i].con +'<br/>';   	
+									} 	      
+										   
+									GUIUpTest.testResult    += '<div><table class="table"><thead>'	
+																+'<tr><th>BUILD </th>'
+																+'<th> BRANCH </th>' 
+																+'<th> SUCCESS</th>'
+																+'<th> COVERAGE </th>'
+																+'<th> COMMIT </th>'
+																+'<th> TESTFRAMEWORK</th>'
+																+'<th> TYPE   </th>'
+																+'<th> DATE </th>'
+																+'<th> VIA </th></tr></thead>';
+																
+																
+									GUIUpTest.testResult 	+= '<tbody><tr><td></td>'
+																+ '<td></td>'
+																+ '<td>' + GUIUpTest.buildBadge(TESTTree.Infos)  + '</td>'  //produce a shield  
+																+ '<td></td>'
+																+ '<td></td>'
+																+ '<td> Framework: ' + GUIUpTest.testFrameworkName +'</td>'
+																+ '<td> push </td>'
+																+ '<td>'+new Date()+'</td>'
+																+ '<td class="danger">Upload - Dirty</td></tr></tbody></table></div>';
+																                                  
+									id = "id";
 
-                    
-                                    GUIUpTest.testResult    +=  '<ul>';     
-                                    for (var i = 0; i < TESTTree.Infos.length; i++) {
-                                        GUIUpTest.testResult += '<h4> File: ' + TESTTree.Infos[i].name + '</h4><li>'+ TESTTree.Infos[i].con +'</li>';   
-                                    } 
-                                    GUIUpTest.testResult    += '</ul>';  
+        
+                                    GUIUpTest.testResult    +=  '<script>'+ TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault  
+															+   'if ( $("#di'+ id +'").is(":visible")) { $("#di'+ id +'").hide();}'
+															+   'else { $("#di'+ id +'").show();}}}); </script>'
+															+   '<a href="#'+ id +'">+</a> More Information <div id="di'+ id +'" hidden>' + temp + '</div>';  
 
 						}
                         else {
@@ -257,17 +293,14 @@
 						
                     //read format xml file
 					this.readXmlFormatFile();    
-
 					this.headline           = '<h3>Show your test result</h3>';	
 						
 					//change view divs	
 					$(this.firstUploadDiv).hide();
 					$(this.secondUploadDiv).show();
 				
-					//build the appendment
-					this.head2fwname		= 	'<h4> Framework:'+ this.testFrameworkName +'</h4>'; 
-					this.appendment  		= 	this.headline + this.head2fwname;
-				    this.appendment 		+= 	this.testResult;
+					//build the appendment	
+				    this.appendment 		+=  this.headline +	this.testResult;
 					
 					//append result to view
 					$(this.secondUploadDiv).append(this.appendment);
