@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-
 use strict;
 use warnings;
 
@@ -78,4 +76,3 @@ use 	Switch;
 	}	
 	#this implemented the method in depends 
 	Worker (\%fileContent);
-

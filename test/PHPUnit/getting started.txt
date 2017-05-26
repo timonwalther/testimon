@@ -1,0 +1,13 @@
+﻿
+Under windows and so on
+https://phpunit.de/manual/current/en/installation.html
+
+Download bzw. wget
+
+➜ wget https://phar.phpunit.de/phpunit.phar
+
+➜ php phpunit.phar --version
+PHPUnit 6.1.0 by Sebastian Bergmann and contributors
+
+
+Testausführung

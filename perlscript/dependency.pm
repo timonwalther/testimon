@@ -1,10 +1,6 @@
-#!/usr/bin/perl
-
 #** @file dependency.pm
 #
 #*
-
-
 # for documentation
 use Doxygen::Filter::Perl;
 
@@ -22,10 +18,7 @@ use Path::Class;
 use JSON::Parse 'json_file_to_perl';
 
 
-#it is only for 
-sub returnValueDependency {
-return 1;
-}
-my $returnValueRequire = returnValueDependency ();
-
-%INC
+#packages 
+require "stringHelper.pm";
+require "xmlHelper.pm";
+1;

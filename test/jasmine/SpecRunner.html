@@ -7,22 +7,24 @@
   <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.6.1/jasmine_favicon.png">
   <link rel="stylesheet" href="lib/jasmine-2.6.1/jasmine.css">
 
+  <!--normal jasmine-->
   <script src="lib/jasmine-2.6.1/jasmine.js"></script>
   <script src="lib/jasmine-2.6.1/jasmine-html.js"></script>
   <script src="lib/jasmine-2.6.1/boot.js"></script>
-
-  <!-- include source files here... -->
-  <!--script src="src/Player.js"></script>
-  <script src="src/Song.js"></script-->
-  <script src="../js/extended.js"></script>
-  <script src="src/Test.js"></script>
   
-
+  <!--jasmine reporters -->
+  <!--script src="jasmine-reporters/src/bundle.js"></script><!--for local testing with browserify-->
+  <script src="jasmine-reporters/src/junit_reporter.js"></script>
+  
+  <!-- include source files here... -->
+  <script src="src/extended.js"></script>
+  
   <!-- include spec files here... -->
-  <!--script src="spec/SpecHelper.js"></script>
-  <script src="spec/PlayerSpec.js"></script-->
   <script src="spec/extendedSpec.js"></script>
-  <!--<script src="src/SpecTest.js"></script>-->
+
+  <script>
+  
+  </script>
   
 
 </head>

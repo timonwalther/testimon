@@ -1,0 +1,4 @@
+https://github.com/larrymyers/jasmine-reporters
+
+Tutorial:
+https://testdetective.com/protractor-tutorial-jasmine-test-logging/

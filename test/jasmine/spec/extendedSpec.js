@@ -1,3 +1,13 @@
+
+
+
+var junitReporter = new jasmineReporters.JUnitXmlReporter({
+    savePath: 'TestReport',
+    consolidateAll: false
+});
+
+jasmine.getEnv().addReporter(junitReporter);
+
 describe("GUIUpTest", function() {
     //var guitest;
  
@@ -12,7 +22,7 @@ describe("GUIUpTest", function() {
          
         //Spec for sum operation
         it("should be able to get the right color", function() {
-            
+           
             
             expect(GUIUpTest.getColor(52,0)).toEqual("orange");
 
