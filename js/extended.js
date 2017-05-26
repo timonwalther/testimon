@@ -77,8 +77,6 @@
                                         content += '{ eventObject.preventDefault(); if ($("#tab'+ fileName + caseName +'").is(":visible")) { $("#tab'+ fileName + caseName +'").hide();}';
                                         content += 'else { $("#tab'+ fileName + caseName +'").show();}   }}); </script>';
                                         content += '<table id="tab'+ fileName + caseName +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
-
-                                    alert (content);
                                     }
 
 
@@ -109,7 +107,7 @@
 	GUIUpTest = new function () {
 				
 				//path to perl generate format.xml file			
-				this.formatFilePath     = 'perlscript/format.xml';
+				this.formatFilePath     = 'uploadfiles/newformats/format.xml';
 				
 				//view div containers
 				this.firstUploadDiv 	= '#uploadContainer';	

@@ -7,10 +7,13 @@
 use 		strict;
 use 		warnings;
 
+use lib "../perlscript/";
+
 #use constants
 use 		constant FRAMEWORK 			=> "boosttest"; 
 use 		constant ROOTXMLELEMENT 	=> '<?xml version="1.0"?><test-framework name="'.FRAMEWORK.'">';
 use 		constant CLOSEROOTELEMENT	=> '</test-framework>';
+use 		constant PATHNEWFILE		=> '../uploadfiles/newformats/format.xml';	
 
 #use constructs 
 use 		Switch;
@@ -147,11 +150,10 @@ sub Worker {
 	my $file; 
 	
 	#touching the new file
-	if (touch('format.xml')) {   
+	if (touch(PATHNEWFILE)) {   
 		#write the testCaseContent to new file 
-		$file = file('format.xml');
-		$file->spew( $result );
+		$file = file(PATHNEWFILE);
+		$file->spew($result);
 	}	
 }
-
 1;

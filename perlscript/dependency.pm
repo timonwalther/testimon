@@ -1,6 +1,8 @@
 #** @file dependency.pm
 #
 #*
+
+use lib "../perlscript/";
 # for documentation
 use Doxygen::Filter::Perl;
 

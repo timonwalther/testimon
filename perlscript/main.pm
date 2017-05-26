@@ -1,7 +1,10 @@
 use strict;
 use warnings;
 
-use constant UPLOADDIR  => "newUploads";
+use lib "../perlscript/";
+
+
+use constant UPLOADDIR  => '../uploadfiles/uploads';
 use constant UPLOADFILE => "uploadlog.json";
 
 require "dependency.pm";

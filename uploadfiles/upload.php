@@ -33,24 +33,17 @@ for($i=0; $i < count($filenames); $i++){
     if(move_uploaded_file($file_data['tmp_name'], "uploads/".$file_data['name'])) {
         $success = true;
         $paths[] = $target;
+		exec("perl ../perlscript/main.pm");  
+		
     } else {
         $success = false;
         break;
     }
 	
 }
-//error_log ("4",3,"error.log");
 
 // check and process based on successful status 
 if ($success === true) {
-    // call the function to save all data to database
-    // code for the following function `save_data` is not 
-    // mentioned in this example
-    //save_data($userid, $username, $paths);
-
-    // store a successful response (default at least an empty array). You
-    // could return any additional response info you need to the plugin for
-    // advanced implementations.
     $output = [];
     // for example you can get the list of files uploaded this way
     $output = ['uploaded' => $paths];
@@ -65,13 +58,7 @@ if ($success === true) {
 }
 
 
-//error_log ("5",3,"error.log");
-
-
 // return a json encoded response for plugin to process successfully
 echo json_encode($output);
-
-
-//error_log("Say hey",3, "error.log");
 
 ?>

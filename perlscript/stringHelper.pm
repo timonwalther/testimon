@@ -11,7 +11,7 @@ package StringHelper;
 	#delete keywords
 	sub withoutCheckedPassed {
 	
-		my $value		= shift;
+		my $value		= withoutWhitespaces (shift);
 		
 		$value 			=~ s/check//;
 		$value 			=~ s/haspassed//;	
