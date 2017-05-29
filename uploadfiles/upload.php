@@ -1,64 +1,89 @@
 <?php
 
-// 'file_data' refers to your file input name attribute
-if (empty($_FILES['input-ke-2'])) 
-{
-    echo json_encode(['error'=>'No files found for upload.']); 
-    // or you can throw an exception 
-    return; // terminate
-}
+class UPLOADER {
 
-// get the files posted
-$file_data = $_FILES['input-ke-2'];
-
-// a flag to see if everything is ok
-$success = null;
-
-// file paths to store
-$paths= [];
-
-// get file names
-$filenames = $file_data['name'];
-
-
-$target_dir = "upload/";
-
-// loop and process files
-for($i=0; $i < count($filenames); $i++){
-    
+	private $file_data; 
+	private $success; 
+	private $target_dir; 
+	private $paths;
+	private $filenames; 
+	private $output;
+	private $perl_command;
+	private $file_count;
 	
-	$ext = explode('.', basename($filenames[$i]));
-	error_log ("1 ".$file_data['tmp_name']." 2 ".$file_data['name']."||",3,"error.log");
 	
-    if(move_uploaded_file($file_data['tmp_name'], "uploads/".$file_data['name'])) {
-        $success = true;
-        $paths[] = $target;
-		exec("perl ../perlscript/main.pm");  
+	function __construct () {
 		
-    } else {
-        $success = false;
-        break;
-    }
+		$this->file_data 	= "";
+		$this->success 		= null;	
+		$this->target_dir 	= "upload/";
+		//$perl_command		= 'perl ../perlscript/main.pm';
+		$this->paths		= []; // file paths to store
+	    $this->output 		= [];
+		$this->file_count	= 0;
+	}
 	
-}
+    public function doUpload () {
+		
+		// 'file_data' refers to your file input name attribute
+		if (empty($_FILES['input-ke-2'])) 
+		{
+			echo json_encode(['error'=>'No files found for upload.']); 
+			// or you can throw an exception 
+			return; // terminate
+		}
+		
+		// get the files posted
+		$this->file_data 	= $_FILES['input-ke-2'];
+		// get file names
+		$this->filenames 	= $this->file_data['name'];
+	
+		$this->file_count 	= count($this->filenames);
+	
+	
+		// loop and process files
+		for($i=0; $i < $this->file_count ; $i++){
+		
+		
+			$ext = explode('.', basename($this->filenames[$i]));
+			error_log ("1 ".$this->file_data['tmp_name']." 2 ".$this->file_data['name']."||",3,"error.log");
+		
+			if(move_uploaded_file($this->file_data['tmp_name'], "uploads/".$this->file_data['name'])) {
+				$this->success = true;
+				$this->paths[] = $target;
+				exec("perl ../perlscript/main.pm");  
+			
+			} else {
+				$this->success = false;
+				break;
+			}
+		}//end for
 
-// check and process based on successful status 
-if ($success === true) {
-    $output = [];
-    // for example you can get the list of files uploaded this way
-    $output = ['uploaded' => $paths];
-} elseif ($success === false) {
-    $output = ['error'=>'Error while uploading images. Contact the system administrator'];
-    // delete any uploaded files
-    foreach ($paths as $file) {
-        unlink($file);
-    }
-} else {
-    $output = ['error'=>'No files were processed.'];
-}
+		// check and process based on successful status 
+		if ($this->success === true) {
+			// for example you can get the list of files uploaded this way
+			$this->output = ['uploaded' => $this->paths];
+		} elseif ($this->success === false) {
+			$this->output = ['error'=>'Error while uploading images. Contact the system administrator'];
+			// delete any uploaded files
+			foreach ($this->paths as $file) {
+				unlink($file);
+			}
+		} else {
+			$this->output = ['error'=>'No files were processed.'];
+		}
+		// return a json encoded response for plugin to process successfully
+		echo json_encode($this->output);
+		
+		$myfile 	= fopen("uploads/uploadlog.json", "w") or die ("Unable to create and open jsonfile.json!");
+		$txt 		= '{'."\r\n".'"testframework": "boosttest",'."\r\n".'"filesnumber": "'.$this->file_count.'"'."\r\n".'}';
+		fwrite($myfile, $txt);
+		fclose($myfile);		
+	}//end doUpload function	
+		
+}//end class UPLOADER
 
-
-// return a json encoded response for plugin to process successfully
-echo json_encode($output);
+$upload = new UPLOADER();
+$upload->doUpload();
 
 ?>

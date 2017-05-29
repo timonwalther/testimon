@@ -34,13 +34,14 @@
             var cases, infos;               
 
             //single vars
-            var nodeFile, nodeCase, parent, content, caseName, fileName, passed, id;
+            var nodeFile, nodeCase, parent, content, caseName, fileName, passed, id, tablehead;
 
+             tablehead              = '<thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';	
             nodeFile                = '';  
             nodeCase                = '';
             content                 = '';
             fileName                = '';  
-			id 						= '';	
+			id 						= '';
             parent                  = root;
             passed                  = true;
             
@@ -78,16 +79,15 @@
 
 										id 		= 	fileName + caseName;
 
-                                        content += '<a href="' + id + '">';
-                                        content += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' 
-												+ nodeCase.getAttribute("caseline") + '</a><br/>';  
+                                        content     += '<a href="' + id + '">';
+                                        content     += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' 
+												    + nodeCase.getAttribute("caseline") + '</a><br/>';  
 												
-                                        content += '<script>' + TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault; 
-                                        content += 'if ($("#tab'+ id +'").is(":visible")) { $("#tab'+ id +'").hide();}';
-                                        content += 'else { $("#tab'+ id +'").show();}   }}); </script>';
-                                        content += '<table id="tab'+ id +'" class="table" hidden><thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+                                        content     += '<script>' + TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault 
+                                                    + 'if ($("#tab'+ id +'").is(":visible")) { $("#tab'+ id +'").hide();}'
+                                                    + 'else { $("#tab'+ id +'").show();}   }}); </script>'
+                                                    + '<table id="tab'+ id +'" class="table" hidden>' + tablehead; 
                                     }
-
 
                                     //fill the array of elements whose are maybe "test-case-passed" or "test-case-not-passed"    
                                     infos.push ({info: nodeCase.nodeName});    
@@ -246,7 +246,7 @@
                                         temp += '<h4> File: ' + TESTTree.Infos[i].name + '</h4>'+ TESTTree.Infos[i].con +'<br/>';   	
 									} 	      
 										   
-									GUIUpTest.testResult    += '<div><table class="table"><thead>'	
+									GUIUpTest.testResult    += '<div style="background-color: #F5F5F5;"><table class="table"><thead>'	
 																+'<tr><th>BUILD </th>'
 																+'<th> BRANCH </th>' 
 																+'<th> SUCCESS</th>'
@@ -266,7 +266,7 @@
 																+ '<td> Framework: ' + GUIUpTest.testFrameworkName +'</td>'
 																+ '<td> push </td>'
 																+ '<td>'+new Date()+'</td>'
-																+ '<td class="danger">Upload - Dirty</td></tr></tbody></table></div>';
+																+ '<td class="danger">Upload - Dirty</td></tr></tbody></table>';
 																                                  
 									id = "id";
 
@@ -274,7 +274,7 @@
                                     GUIUpTest.testResult    +=  '<script>'+ TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault  
 															+   'if ( $("#di'+ id +'").is(":visible")) { $("#di'+ id +'").hide();}'
 															+   'else { $("#di'+ id +'").show();}}}); </script>'
-															+   '<a href="#'+ id +'">+</a> More Information <div id="di'+ id +'" hidden>' + temp + '</div>';  
+															+   '<a href="#'+ id +'">+</a> More Information <div id="di'+ id +'" hidden>' + temp + '</div></div>';  
 
 						}
                         else {
