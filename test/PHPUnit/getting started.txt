@@ -10,4 +10,8 @@ Download bzw. wget
 PHPUnit 6.1.0 by Sebastian Bergmann and contributors
 
 
+With Moodle
+
+https://docs.moodle.org/dev/PHPUnit_installation_in_Windows
+
 Testausführung

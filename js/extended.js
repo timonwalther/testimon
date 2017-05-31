@@ -2,9 +2,25 @@
 	
 
 	//addendum M&W
-    var Iterator, GUIUpTest, TESTTree;
+    var Iterator, GUIUpTest, TESTTree, ToggleScriptBuilder;
 
-    Iterator  = function () {
+    ToggleScriptBuilder = new function () {
+
+        this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
+	    this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	    
+
+        this.makeScript = function (id, type)  { 
+
+        return  '<script>'          + ToggleScriptBuilder.ToggleScriptOne 
+                                    + '.match(/'+ id +'/)) {' 
+                                    + ToggleScriptBuilder.ToggleScriptDefault 
+                                    + 'if ($("#'+ type + id +'").is(":visible")) { $("#'+ type+ id +'").hide();}'
+                                    + 'else { $("#'+ type + id +'").show();}   }}); </script>';                                                         
+        } // makeScript method    
+    } //ToggleScriptBuilder
+
+
+    Iterator  = new function () {
 
     this.makeIterator = function (array){
             var nextIndex = 0;
@@ -25,21 +41,37 @@
         this.Infos              =   [];
 		
 		
+        //constants
 		this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
 		this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	
+        this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
 
-        this.buildFirstLevel = function (root, itemsLen) {
+
+        this.buildCaseRow           = function (id ,caseName, testingTime, caseline ) {
+
+            if (typeof(id) != undefined && typeof (caseName) != undefined && typeof(testingTime) != undefined && typeof(caseline) != undefined) {
+                return '<div style="margin-left:50px;"><a href="' + id + '"><strong>Test-Case:</strong>' 
+                        + caseName      + '- with time ' 
+                        + testingTime   + 'ms -  in line ' 
+				        + caseline      + '</a></div>';     
+            }
+            else 
+                return 'UNDEFINED TEST CASE VALUES';   
+
+        }
+
+
+        this.buildView = function (root, itemsLen) {
 
             //arrays
             var cases, infos;               
 
             //single vars
-            var nodeFile, nodeCase, parent, content, caseName, fileName, passed, id, tablehead;
-
-             tablehead              = '<thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';	
+            var nodeFile, nodeCase, parent, ViewContent, caseName, fileName, passed, id;
+	
             nodeFile                = '';  
             nodeCase                = '';
-            content                 = '';
+            ViewContent             = '';
             fileName                = '';  
 			id 						= '';
             parent                  = root;
@@ -70,23 +102,18 @@
                                    if (caseName != nodeCase.getAttribute("case")) {
 
                                         //new caseName and not the first one, then close table element
-                                        j > 0 ?  content += '</tbody></table>': content = content;  
+                                        j > 0 ?  ViewContent += '</tbody></table>': ViewContent = ViewContent;  
 
                                         caseName = nodeCase.getAttribute("case");
 
                                         //fill the array of testcases        
                                         cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") }); 
 
-										id 		= 	fileName + caseName;
+										id 		        = 	fileName + caseName;
 
-                                        content     += '<a href="' + id + '">';
-                                        content     += '<strong>Test-Case:</strong> ' + caseName + '- with time ' + nodeCase.getAttribute("testingTime") + 'ms -  in line ' 
-												    + nodeCase.getAttribute("caseline") + '</a><br/>';  
-												
-                                        content     += '<script>' + TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault 
-                                                    + 'if ($("#tab'+ id +'").is(":visible")) { $("#tab'+ id +'").hide();}'
-                                                    + 'else { $("#tab'+ id +'").show();}   }}); </script>'
-                                                    + '<table id="tab'+ id +'" class="table" hidden>' + tablehead; 
+                                        ViewContent     +=  TESTTree.buildCaseRow (id ,caseName, nodeCase.getAttribute("testingTime"), nodeCase.getAttribute("caseline"))
+                                                        +   ToggleScriptBuilder.makeScript(id, 'tab')
+                                                        +   '<table id="tab'+ id +'" class="table" hidden>' + TESTTree.InfoTableHead ; 
                                     }
 
                                     //fill the array of elements whose are maybe "test-case-passed" or "test-case-not-passed"    
@@ -94,19 +121,19 @@
                                     nodeCase.nodeName != "test-case-passed" ? passed = false : passed = passed; 
 
                                     if (passed)      
-                                        content      += '<tr class="success"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';    
+                                        ViewContent         += '<tr class="success"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';    
                                     else 
-                                        content     +=  '<tr class="danger"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
+                                        ViewContent         +=  '<tr class="danger"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
                                 
                                 }   
                             }//end inner for
 
                             content += '</tbody></table>';
-                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, con: content, error: false, pass: passed});
+                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, view: ViewContent, error: false, pass: passed});
                     } //end if
 
-                    //unset the content var 
-                    content = '';
+                    //unset the ViewContent var 
+                    ViewContent = '';
 
 			    } //end for
         }//end buildFirstLevel      
@@ -114,6 +141,19 @@
     } //end TESTTree object 
 
 	GUIUpTest = new function () {
+
+                //constants
+                this.TestOutputTableHead= '<div style="background-color: #F5F5F5;"><table class="table"><thead>'	
+										+'<tr><th>BUILD </th>'
+										+'<th> BRANCH </th>' 
+										+'<th> SUCCESS</th>'
+										+'<th> COVERAGE </th>'
+										+'<th> COMMIT </th>'
+										+'<th> TESTFRAMEWORK</th>'
+										+'<th> TYPE   </th>'
+										+'<th> DATE </th>'
+										+'<th> VIA </th></tr></thead>';
+
 				
 				//path to perl generate format.xml file			
 				this.formatFilePath     = 'uploadfiles/newformats/format.xml';
@@ -135,31 +175,44 @@
 				//view elements
 				this.headline			= ''; 
 				this.appendment			= ''; 
-				
+			
+
+                this.browserCheckXML   = function (rawFile) {
+
+
+                    var parser, xmlDoc;    
+
+                    if (window.DOMParser)
+				    {
+									parser 				= new DOMParser();
+									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");	
+					}
+					else // Internet Explorer  
+                    {
+									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");
+									xmlDoc.async 		= true;
+									xmlDoc.loadXML(rawFile.responseText);
+					}            
+
+                   return xmlDoc;         
+                }//end browserCheckXML
 
                 this.getColor           = function (endLen, wholeLen) {
 
                     var quot, proof;
                     
-                    quot            = (wholeLen / endLen) * 100;   
-                    proof           = (quot == 100);
+                    quot            = (endLen * 1.0 / wholeLen) * 100;   
+                    proof           = (quot == 0);
 
                     switch (proof) {
 
                             case true : return "red" ;
-
-                            case false : proof = (quot < 100 && quot >= 60);
-
+                            case false : proof = (quot >= 10 && quot < 30);
                             case true: return "orange";
-
                             case false: proof =  (quot < 60 && quot >= 30 );
-
                             case true: return "yellow";
-
-                            case false: proof = (quot < 30 && quot >= 10 );
-
+                            case false: proof = (quot > 60  && quot <= 95 );
                             case true: return "yellowgreen";        
-
                             default: return "green";
                     }
                 } //getColor
@@ -206,7 +259,7 @@
 				this.readXmlFormatFile = function ()
 				{
 					
-					var rawFile,xmlDoc, parser;
+					var rawFile,xmlDoc;
 
 					rawFile = new XMLHttpRequest();
 					
@@ -219,61 +272,42 @@
 						if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0))
 						{		
 
-								if (window.DOMParser)
-								{
-									parser 				= new DOMParser();
-									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");	
-    
-								}
-								else // Internet Explorer
-								{
-									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");
-									xmlDoc.async 		= true;
-									xmlDoc.loadXML(rawFile.responseText);
-								}
-                                    
-									var temp, id;
-									temp = ''; 
-									id = '';
+                                    xmlDoc = GUIUpTest.browserCheckXML(rawFile); 
+
+									var temp, id, infoIterator, currentElem;
+									temp                = ''; 
+									id                  = '';
                                     //name of the testframework
                                     GUIUpTest.testFrameworkName	        = xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");                        
                                     
                                     //got first element
-                                    TESTTree.buildFirstLevel(xmlDoc.getElementsByTagName("test-framework")[0],xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
-                                           
-									  for (var i = 0; i < TESTTree.Infos.length; i++) {
-									
-                                        temp += '<h4> File: ' + TESTTree.Infos[i].name + '</h4>'+ TESTTree.Infos[i].con +'<br/>';   	
-									} 	      
-										   
-									GUIUpTest.testResult    += '<div style="background-color: #F5F5F5;"><table class="table"><thead>'	
-																+'<tr><th>BUILD </th>'
-																+'<th> BRANCH </th>' 
-																+'<th> SUCCESS</th>'
-																+'<th> COVERAGE </th>'
-																+'<th> COMMIT </th>'
-																+'<th> TESTFRAMEWORK</th>'
-																+'<th> TYPE   </th>'
-																+'<th> DATE </th>'
-																+'<th> VIA </th></tr></thead>';
-																
-																
+                                    TESTTree.buildView(xmlDoc.getElementsByTagName("test-framework")[0],xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
+
+                                    infoIterator = Iterator.makeIterator(TESTTree.Infos);
+                                    currentElem  = infoIterator.next();
+
+                                        while (!currentElem.done) {
+                                            temp        += '<h4 style="margin-left:15px;"> File: ' + currentElem.value.name + '</h4>'+ currentElem.value.view +'<br/>';
+                                            currentElem = infoIterator.next();
+                                        }
+
+                                    infoIterator = null;
+                            				   
+									GUIUpTest.testResult    += GUIUpTest.TestOutputTableHead;
+																								
 									GUIUpTest.testResult 	+= '<tbody><tr><td></td>'
 																+ '<td></td>'
-																+ '<td>' + GUIUpTest.buildBadge(TESTTree.Infos)  + '</td>'  //produce a shield  
+																+ '<td>'                +   GUIUpTest.buildBadge(TESTTree.Infos)  + '</td>'  //produce a shield  
 																+ '<td></td>'
 																+ '<td></td>'
-																+ '<td> Framework: ' + GUIUpTest.testFrameworkName +'</td>'
+																+ '<td> Framework: '    +   GUIUpTest.testFrameworkName +'</td>'
 																+ '<td> push </td>'
-																+ '<td>'+new Date()+'</td>'
+																+ '<td>'                +   new Date()  +   '</td>'
 																+ '<td class="danger">Upload - Dirty</td></tr></tbody></table>';
 																                                  
-									id = "id";
-
+									id = "id"; //this is only for testing "id" isn't the final solution
         
-                                    GUIUpTest.testResult    +=  '<script>'+ TESTTree.ToggleScriptOne + '.match(/'+ id +'/)) {' + TESTTree.ToggleScriptDefault  
-															+   'if ( $("#di'+ id +'").is(":visible")) { $("#di'+ id +'").hide();}'
-															+   'else { $("#di'+ id +'").show();}}}); </script>'
+                                    GUIUpTest.testResult    +=  ToggleScriptBuilder.makeScript(id, 'di') 
 															+   '<a href="#'+ id +'">+</a> More Information <div id="di'+ id +'" hidden>' + temp + '</div></div>';  
 
 						}

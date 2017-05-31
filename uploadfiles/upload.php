@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
+
 class UPLOADER {
 
 	private $file_data; 
