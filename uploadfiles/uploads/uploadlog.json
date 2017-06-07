@@ -1,4 +1,4 @@
 {
-"testframework": "boosttest",
+"testframework": "nunit",
 "filesnumber": "1"
 }

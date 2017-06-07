@@ -56,7 +56,8 @@ class UPLOADER {
 				$this->success = true;
 				$this->paths[] = $target;
 				exec("perl ../perlscript/main.pm");  
-			
+				unlink ("uploads/".$this->file_data['name']);
+
 			} else {
 				$this->success = false;
 				break;
@@ -80,7 +81,7 @@ class UPLOADER {
 		echo json_encode($this->output);
 		
 		$myfile 	= fopen("uploads/uploadlog.json", "w") or die ("Unable to create and open jsonfile.json!");
-		$txt 		= '{'."\r\n".'"testframework": "boosttest",'."\r\n".'"filesnumber": "'.$this->file_count.'"'."\r\n".'}';
+		$txt 		= '{'."\r\n".'"testframework": "nunit",'."\r\n".'"filesnumber": "'.$this->file_count.'"'."\r\n".'}';
 		fwrite($myfile, $txt);
 		fclose($myfile);		
 	}//end doUpload function	

@@ -19,4 +19,11 @@ package StringHelper;
 		return $value;
 	}
 	
+	sub getBranch {
+	
+		my $value 	= 	withoutWhitespaces (shift);
+		$value 		=~ 	s/TestSuite//;
+		return $value;
+	}
+
 1;	

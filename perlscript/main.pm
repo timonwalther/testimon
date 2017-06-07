@@ -48,22 +48,27 @@ use 	Switch;
 				require "boosttest.pm";	
 				} 
 				
+			case "nunit"
+				{
+				require "nunit.pm";
+				}	
 			case "junit" 
 				{ 
 				require "junit.pm";
 				} 	
+			case "googletest"
+				{
+				require "googletest.pm";
+				}
 			case "catch"
 				{
 				require "catch.pm";
 				}
-			case "Jasmine"
+			case "jasmine"
 				{
 				require "jasmine.pl";
 				}
-			case "GoogleTest"
-				{
-				require "googletest.pm";
-				}
+
 			else 
 				{		
 				print "Nothing is correct, damn!";
@@ -75,7 +80,8 @@ use 	Switch;
 	
 	foreach my $fil (@files) {
 			$content = $dir->file($fil)->slurp(); #it works only with this temp 
-			$fileContent {$fil} =  $content			
+			$fileContent {$fil} =  $content		
+			#unlink $fil or warn "Could not unlink $fil \n";		
 	}	
 	#this implemented the method in depends 
 	Worker (\%fileContent);

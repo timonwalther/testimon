@@ -1,6 +1,6 @@
 #var/www/html/testimon
 
-#** @file boosttest.pl
+#** @file boosttest.pm
 #   This file change the boost xml format in the defined middle format 
 #* 
 
@@ -14,6 +14,7 @@ use 		constant FRAMEWORK 			=> "boosttest";
 use 		constant ROOTXMLELEMENT 	=> '<?xml version="1.0"?><test-framework name="'.FRAMEWORK.'">';
 use 		constant CLOSEROOTELEMENT	=> '</test-framework>';
 use 		constant PATHNEWFILE		=> '../uploadfiles/newformats/format.xml';	
+use 		constant ROOT				=> 'TestLog';
 
 #use constructs 
 use 		Switch;
@@ -100,6 +101,8 @@ sub Worker {
 	my $test;
 	my $key;
 	my $caseName;
+	my $suite;	
+	my $branch;				#build of Master Test Suite
  
 	my %fileContent;
 	%fileContent =  %{shift()};
@@ -112,14 +115,16 @@ sub Worker {
 		#*
 				
 		$test   				= 	$parser->parse_string($fileContent{$key});
+	    
+		$suite					=	$test->findnodes('//'.ROOT.'/TestSuite/@name'); 
+		$branch					= 	StringHelper::getBranch($suite);
 	
 		$result			 		.=  XMLHelper::getFileElement($key, 'open');  
 		 
-		foreach my $case ($test->findnodes('/TestLog/TestSuite')) {
+		foreach my $case ($test->findnodes('/'.ROOT.'/TestSuite')) {
   		
 				#get the attributes:  	<Testcase  'name' , 'line' , 'file'>   
-				my @caseNames      		= $case->findnodes('//TestCase/@name');
-				
+				my @caseNames      		= $case->findnodes('//TestCase/@name');				
 				my @caseLines			= $case->findnodes('//TestCase/@line'); 
 				my @caseFiles       	= $case->findnodes('//TestCase/@file');
 		
