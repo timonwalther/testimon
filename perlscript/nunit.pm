@@ -5,6 +5,7 @@
 use 		strict;
 use 		warnings;
 
+#use lib "../libs/perl/XML-LibXML-2.0129/lib/XML/LibXML";
 use lib "../perlscript/";
 
 #use constants
@@ -16,8 +17,10 @@ use 		constant ROOT				=> 'test-results';
 
 #use constructs 
 use 		Switch;
+use 		XML::LibXML;
 
 require 	"dependency.pm"; #this source holds every dependency
+ 
  
 sub buildAttributes {
 
@@ -84,6 +87,25 @@ sub buildElements {
 	}#foreach end
 	return "@testCaseInfoResult";	
 }  
+
+
+#sub GoTrough {
+#
+#	my $path = shift;
+#	my $test = shift; 
+#	
+#	if ($test->hasChildnodes()) {
+#		GoTrough($path.'/test-suite', $test);
+#		
+#	}	
+#	else
+#			{
+#		
+#			if ($test->)	
+#
+#			}
+#}
+
   
 #** @method Worker
 #   
@@ -96,7 +118,8 @@ sub Worker {
     my $result 				= ROOTXMLELEMENT; 
     my $parser     			= XML::LibXML->new();
     
-	my $test;
+	my $test_str;
+	my $test_fil;
 	my $key;
 	my $caseName;
 	my $results;	
@@ -107,11 +130,16 @@ sub Worker {
 	
 	my $enviroment;
 	my $cultureInfo;
- 
+	my $node;
+	my $parentNode;
+    
  
 	my %testResultAttributes;
 	my %enviromnetAttributes;
 	my %cultureInfoAttributes;
+	my %XmlTree;
+	my @XmlStructure;
+ 
  
  #
  # Schema 
@@ -121,120 +149,137 @@ sub Worker {
 
  #				   test-suite
  #
- #
  
- 
- 
-	my %fileContent;
-	%fileContent =  %{shift()};
-  
+	my 	%fileContent;
+		%fileContent 	=  	%{shift()};
+
+	my 	$dir;
+		$dir 			= 	shift;
+	
+			
     # for all arguments   
     foreach $key (keys %fileContent) {
      
 		#** @var $test
 		#   take one argument (the content of a file) 
 		#*
-				
-		$test   				= 	$parser->parse_string($fileContent{$key});
-	    
-		$results				=	$test->findnodes('//'.ROOT); 
+			
+        $test_fil 	=	$parser->parse_file($dir.'\\'.$key);			
+		$test_str  	= 	$parser->parse_string($fileContent{$key});
+	   
+	   
+		$results	=	$test_str->findnodes('//'.ROOT); 
 		
-		if ($test->findnodes('//'.ROOT.'/@name')) {
-			$testResultAttributes{'name'} = $test->findnodes('//'.ROOT.'/@name');		
+		if ($test_str->findnodes('//'.ROOT.'/@name')) {
+			$testResultAttributes{'name'} = $test_str->findnodes('//'.ROOT.'/@name');		
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@total')) {
-			$testResultAttributes{'total'} = $test->findnodes('//'.ROOT.'/@total');
+		if ($test_str->findnodes('//'.ROOT.'/@total')) {
+			$testResultAttributes{'total'} = $test_str->findnodes('//'.ROOT.'/@total');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@errors')) {
-			$testResultAttributes{'errors'} = $test->findnodes('//'.ROOT.'/@errors');
+		if ($test_str->findnodes('//'.ROOT.'/@errors')) {
+			$testResultAttributes{'errors'} = $test_str->findnodes('//'.ROOT.'/@errors');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@failures')) {
-			$testResultAttributes{'failures'} = $test->findnodes('//'.ROOT.'/@failures');
+		if ($test_str->findnodes('//'.ROOT.'/@failures')) {
+			$testResultAttributes{'failures'} = $test_str->findnodes('//'.ROOT.'/@failures');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@not-run')) {
-			$testResultAttributes{'notrun'} = $test->findnodes('//'.ROOT.'/@not-run');
+		if ($test_str->findnodes('//'.ROOT.'/@not-run')) {
+			$testResultAttributes{'notrun'} = $test_str->findnodes('//'.ROOT.'/@not-run');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@inconclusive')) {
-			$testResultAttributes{'inconclusive'} = $test->findnodes('//'.ROOT.'/@inconclusive');
+		if ($test_str->findnodes('//'.ROOT.'/@inconclusive')) {
+			$testResultAttributes{'inconclusive'} = $test_str->findnodes('//'.ROOT.'/@inconclusive');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@ignored')) {
-			$testResultAttributes{'ignored'} = $test->findnodes('//'.ROOT.'/@ignored');
+		if ($test_str->findnodes('//'.ROOT.'/@ignored')) {
+			$testResultAttributes{'ignored'} = $test_str->findnodes('//'.ROOT.'/@ignored');
 		} 
 		
-		if ($test->findnodes('//'.ROOT.'/@skipped')) {
-			$testResultAttributes{'skipped'} = $test->findnodes('//'.ROOT.'/@skipped');
+		if ($test_str->findnodes('//'.ROOT.'/@skipped')) {
+			$testResultAttributes{'skipped'} = $test_str->findnodes('//'.ROOT.'/@skipped');
 		} 
 			
-		if ($test->findnodes('//'.ROOT.'/@invalid')) {
-			$testResultAttributes{'invalid'} = $test->findnodes('//'.ROOT.'/@invalid');
+		if ($test_str->findnodes('//'.ROOT.'/@invalid')) {
+			$testResultAttributes{'invalid'} = $test_str->findnodes('//'.ROOT.'/@invalid');
 		} 
 
-		if ($test->findnodes('//'.ROOT.'/@date')) {
-			$testResultAttributes{'date'} = $test->findnodes('//'.ROOT.'/@date');
+		if ($test_str->findnodes('//'.ROOT.'/@date')) {
+			$testResultAttributes{'date'} = $test_str->findnodes('//'.ROOT.'/@date');
 		} 
 
-		if ($test->findnodes('//'.ROOT.'/@time')) {
-			$testResultAttributes{'time'} = $test->findnodes('//'.ROOT.'/@time');
+		if ($test_str->findnodes('//'.ROOT.'/@time')) {
+			$testResultAttributes{'time'} = $test_str->findnodes('//'.ROOT.'/@time');
 		} 		
 			
 		
-		if ($test->findnodes('//'.ROOT.'/environment')) {
+		if ($test_str->findnodes('//'.ROOT.'/environment')) {
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@nunit-version')) {
-				$enviromnetAttributes{'nunitversion'}  	= $test->findnodes('//'.ROOT.'/environment/@nunit-version');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@nunit-version')) {
+				$enviromnetAttributes{'nunitversion'}  	= $test_str->findnodes('//'.ROOT.'/environment/@nunit-version');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@clr-version')) {
-				$enviromnetAttributes{'clrversion'} 	= $test->findnodes('//'.ROOT.'/environment/@clr-version');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@clr-version')) {
+				$enviromnetAttributes{'clrversion'} 	= $test_str->findnodes('//'.ROOT.'/environment/@clr-version');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@os-version')) {
-				$enviromnetAttributes{'osversion'}		= $test->findnodes('//'.ROOT.'/environment/@os-version');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@os-version')) {
+				$enviromnetAttributes{'osversion'}		= $test_str->findnodes('//'.ROOT.'/environment/@os-version');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@platform')) {
-				$enviromnetAttributes{'platform'}		= $test->findnodes('//'.ROOT.'/environment/@platform');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@platform')) {
+				$enviromnetAttributes{'platform'}		= $test_str->findnodes('//'.ROOT.'/environment/@platform');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@cwd')) {
-				$enviromnetAttributes{'cwd'}			= $test->findnodes('//'.ROOT.'/environment/@cwd');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@cwd')) {
+				$enviromnetAttributes{'cwd'}			= $test_str->findnodes('//'.ROOT.'/environment/@cwd');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@machine-name')) {
-				$enviromnetAttributes{'machinename'}	= $test->findnodes('//'.ROOT.'/environment/@machine-name');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@machine-name')) {
+				$enviromnetAttributes{'machinename'}	= $test_str->findnodes('//'.ROOT.'/environment/@machine-name');	
 			}
 			
-			if ($test->findnodes('//'.ROOT.'/environment/@user')) {
-				$enviromnetAttributes{'user'}			= $test->findnodes('//'.ROOT.'/environment/@user');	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@user')) {
+				$enviromnetAttributes{'user'}			= $test_str->findnodes('//'.ROOT.'/environment/@user');	
 			}
 
-			if ($test->findnodes('//'.ROOT.'/environment/@user-domain')) {
-				$enviromnetAttributes{'userdomain'}		= $test->findnodes('//'.ROOT.'/environment/@user-domain');	
-			}
-			
-			
-		}
-			
-		if ($test->findnodes('//'.ROOT.'/culture-info')) {
-		
-			if ($test->findnodes('//'.ROOT.'/culture-info/@current-uiculture')) {
-				$cultureInfoAttributes{'currentuiculture'} 	= $test->findnodes('//'.ROOT.'/culture-info/@current-uiculture');	
-			}
-			
-			if ($test->findnodes('//'.ROOT.'/culture-info/@current-culture')) {
-				$cultureInfoAttributes{'currentculture'} 	=  $test->findnodes('//'.ROOT.'/culture-info/@current-culture')."\n";	
+			if ($test_str->findnodes('//'.ROOT.'/environment/@user-domain')) {
+				$enviromnetAttributes{'userdomain'}		= $test_str->findnodes('//'.ROOT.'/environment/@user-domain');	
 			}
 		}
-		 
+			
+		if ($test_str->findnodes('//'.ROOT.'/culture-info')) {
 		
+			if ($test_str->findnodes('//'.ROOT.'/culture-info/@current-uiculture')) {
+				$cultureInfoAttributes{'currentuiculture'} 	= $test_str->findnodes('//'.ROOT.'/culture-info/@current-uiculture');	
+			}
+			
+			if ($test_str->findnodes('//'.ROOT.'/culture-info/@current-culture')) {
+				$cultureInfoAttributes{'currentculture'} 	=  $test_str->findnodes('//'.ROOT.'/culture-info/@current-culture')."\n";	
+			}
+		}
+		
+		
+		
+		my $index = 0;
+		
+
+		
+		while ($test_str->hasChildNodes()) {
+		
+			$node = $test_str->firstChild;
+				
+		
+		
+		}	
+		
+		
+		
+	}#end foreach	
 	
-	}	
+	
 	$result   	.= CLOSEROOTELEMENT;
   
 	my $file; 

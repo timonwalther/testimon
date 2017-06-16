@@ -20,6 +20,7 @@ use 	Switch;
 	
 	my  @files     			= ();
 	my 	%fileContent; 		
+	my 	%filePathes;
 	
 	opendir (DIR, $dir) or die ("There exist no UPLOADDIR!\n");
 	
@@ -80,8 +81,7 @@ use 	Switch;
 	
 	foreach my $fil (@files) {
 			$content = $dir->file($fil)->slurp(); #it works only with this temp 
-			$fileContent {$fil} =  $content		
-			#unlink $fil or warn "Could not unlink $fil \n";		
+			$fileContent {$fil} =  $content;		
 	}	
 	#this implemented the method in depends 
-	Worker (\%fileContent);
+	Worker (\%fileContent, $dir);

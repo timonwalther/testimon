@@ -68,4 +68,13 @@ package XMLHelper;
 			}   
 		} 
 	}#end getXPathQueryBoosttest	
+	
+	
+	#this function returns is 
+	sub WhoIS {
+	
+	
+	
+	}
+	
 1;	
