@@ -264,16 +264,27 @@ sub Worker {
 		
 		
 		my $index = 0;
+		#$test_str = $
 		
-
 		
-		while ($test_str->hasChildNodes()) {
+		$node = $test_fil;
 		
-			$node = $test_str->firstChild;
+		while ($node->hasChildNodes() || $node->nextSibling() ) {
+		
+		    print XMLHelper::WhoIS($node)."\n"; 
 				
+			$parentNode	= $node;	
 		
-		
-		}	
+			if ($node->firstChild) {
+				$node = $node->firstChild;
+			} 
+			else {
+				$node = $node->nextSibling(); 
+			}
+			
+			#print "1\n";
+			#print XMLHelper::WhoIS($node)."\n";	
+		}#end while	
 		
 		
 		

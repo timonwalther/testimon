@@ -1,0 +1,98 @@
+___________________________________________________________________
+Checkout, Clone special branch 
+___________________________________________________________________
+
+(1) git clone -b branch urltorepository.git
+
+___________________________________________________________________
+Doxygen Worklflow
+___________________________________________________________________
+
+(1) Create Doxyfile:    doxygen -g
+
+(2) https://www.stack.nl/~dimitri/doxygen/manual/perlmod.html
+
+__________________________________________________________________
+Apache starten
+__________________________________________________________________
+
+Error: Invalid Mutex directory in argument file:${APACHE_LOCK_DIR}
+
+Because: apache 2
+
+Solution: sudo service apache2 start
+
+__________________________________________________________________
+Install phpmyadmin under linux  - LAMP install
+__________________________________________________________________
+
+Problem and Solution
+http://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache
+
+
+https://www.digitalocean.com/community/tutorials/how-to-launch-your-site-on-a-new-ubuntu-14-04-server-with-lamp-sftp-and-dns
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04
+
+__________________________________________________________________
+Mysql 
+__________________________________________________________________
+
+Connect to Database
+(1) https://superuser.com/questions/603026/mysql-how-to-fix-access-denied-for-user-rootlocalhost
+
+__________________________________________________________________
+.htaccess Problem
+__________________________________________________________________
+https://github.com/Block8/PHPCI/issues/316
+http://serverfault.com/questions/673853/limit-scope-of-an-apache-vhost-conf-alias/673866
+https://wiki.ubuntuusers.de/Apache/
+
+
+http://stackoverflow.com/questions/15745045/how-do-i-resolve-git-saying-commit-your-changes-or-stash-them-before-you-can-me
+
+__________________________________________________________________
+Know the OS
+__________________________________________________________________
+uname -a 
+
+___________________________________________________________________
+Get an access to a server
+___________________________________________________________________
+About SSH - > Windows Putty
+And upload files about WinSCP 
+
+___________________________________________________________________
+A problem with perl  --- XML::LibXML --- hasChildNodes()
+___________________________________________________________________
+
+Search maybe 3 dayes a failure. It is embarrassing
+
+would use a node structure for XML::LibXML. Thougt a i have to install some more compontents 
+
+But nothing works. Perl doesn't know functions like "hasChildNodes()"
+
+So i changed my parser initialization, it looks like: 
+
+Doesn't work
+$test = $parser->parse_string($fileContent{$key});
+$root = $test->getDocumentElement();	
+$node = $root->hasChildNodes();
+
+Work
+$test = $parser->parse_file("test.xml");
+$root = $test->getDocumentElement();	
+$node = $root->hasChildNodes();
+__________________________________________________________________
+multi-line comments with perl
+___________________________________________________________________
+
+=head1
+comment...
+=cut
+
+works with notepad++ with an .pm suffix in that case
+
+
+
+
+ 
