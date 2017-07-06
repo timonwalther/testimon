@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 class UPLOADER {
 
 	private $file_data; 
+	private $select_box;
 	private $success; 
 	private $target_dir; 
 	private $paths;
@@ -14,18 +15,50 @@ class UPLOADER {
 	private $output;
 	private $perl_command;
 	private $file_count;
-	
+	private $filename_count;
 	
 	function __construct () {
 		
-		$this->file_data 	= "";
-		$this->success 		= null;	
-		$this->target_dir 	= "upload/";
-		//$perl_command		= 'perl ../perlscript/main.pm';
-		$this->paths		= []; // file paths to store
-	    $this->output 		= [];
-		$this->file_count	= 0;
+		$this->file_data 		= "";
+		$this->select_box		= "";
+		$this->success 			= null;	
+		$this->target_dir 		= "upload/";
+		//$perl_command			= 'perl ../perlscript/main.pm';
+		$this->paths			= []; // file paths to store
+	    $this->output 			= [];
+		$this->file_count		= 0;
+		$this->filename_count 	= "sum.txt";	
 	}
+	
+	//old function of myself ;-)
+	private function storeFilesCount ($files_count) {
+		
+		$filename	=	$this->filename_count;
+		$handle		=	fopen($filename,"r");
+		$sum 		= 	fread($handle,filesize($filename));
+		fclose($handle);
+
+		$sum		=	trim($sum);
+		$result		=	strval(intval($sum,10) + intval($res,10) + $files_count);
+		
+		$handle		=	fopen($filename,"w");
+		fwrite($handle,$result);
+		fclose($handle);
+	}
+	
+	private function getFilesCount () {
+		
+		$filename	=	$this->filename_count;
+		$handle		=	fopen($filename,"r");
+		$sum 		= 	trim(fread($handle,filesize($filename)));
+		fclose($handle);
+		
+		$handle 	= fopen("uploads/uploadlog.json", "w") or die ("Unable to create and open jsonfile.json!");
+		$txt 		= '{'."\r\n".'"testframework":"'.$this->select_box.'",'."\r\n".'"filesnumber":"'.$sum.'"'."\r\n".'}';
+		fwrite($handle, $txt);
+		fclose($handle);	
+	}
+	
 	
     public function doUpload () {
 		
@@ -39,19 +72,22 @@ class UPLOADER {
 		
 		// get the files posted
 		$this->file_data 	= $_FILES['input-ke-2'];
+		
+		$this->storeFilesCount(count($this->file_data['name']));
+		
+		$this->select_box	= $_GET['framework'];
+		
+		error_log ("Select".$this->select_box."|",3,"error.log");
 		// get file names
 		$this->filenames 	= $this->file_data['name'];
 	
 		$this->file_count 	= count($this->filenames);
 	
-	
 		// loop and process files
 		for($i=0; $i < $this->file_count ; $i++){
 		
-		
 			$ext = explode('.', basename($this->filenames[$i]));
-			error_log ("1 ".$this->file_data['tmp_name']." 2 ".$this->file_data['name']."||",3,"error.log");
-		
+		 
 			if(move_uploaded_file($this->file_data['tmp_name'], "uploads/".$this->file_data['name'])) {
 				$this->success = true;
 				$this->paths[] = $target;
@@ -80,10 +116,9 @@ class UPLOADER {
 		// return a json encoded response for plugin to process successfully
 		echo json_encode($this->output);
 		
-		$myfile 	= fopen("uploads/uploadlog.json", "w") or die ("Unable to create and open jsonfile.json!");
-		$txt 		= '{'."\r\n".'"testframework": "nunit",'."\r\n".'"filesnumber": "'.$this->file_count.'"'."\r\n".'}';
-		fwrite($myfile, $txt);
-		fclose($myfile);		
+		//read count of files and store framework and number in json file
+		$this->getFilesCount();
+	
 	}//end doUpload function	
 		
 }//end class UPLOADER

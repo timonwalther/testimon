@@ -1,1 +1,5 @@
-<?xml version="1.0"?><test-framework name="nunit"></test-framework>
+<?xml version="1.0"?><test-framework name="nunit"><test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("60","70","130",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
+<test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("40","50","90",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
+<test-case name='Pickles.TestHarness.AdditionFeature.AddTwoNumbers' file='results-example-nuint.xml' line='' result='success'/>
+<test-case name='Pickles.TestHarness.AdditionFeature.FailToAddTwoNumbers' file='results-example-nuint.xml' line='' result='failure'/>
+</test-framework>

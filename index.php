@@ -1,3 +1,10 @@
+﻿<?php
+//init stuff
+$handle		=	fopen("uploadfiles/sum.txt","w");
+fwrite($handle,"0");
+fclose($handle);
+?>
+
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
   <head>
@@ -18,6 +25,8 @@
 			  
 			<link href="mixedlibs/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 			<link href="mixedlibs/bootstrap-fileinput/themes/explorer/theme.css" rel="stylesheet">
+
+
 			  
                 <style>
                   a {
@@ -73,7 +82,7 @@
     </div>
 	
 	</body>
-	
+
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
   <!-- Libs -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -97,5 +106,6 @@
   <script src="app/data.js"></script>
   <script src="app/directives.js"></script>
   <script src="app/authCtrl.js"></script>
+
 </html>
 

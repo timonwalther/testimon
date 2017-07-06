@@ -114,8 +114,7 @@ sub Worker {
 		#   take one argument (the content of a file) 
 		#*
 				
-		$test   				= 	$parser->parse_string($fileContent{$key});
-	    
+		$test   				= 	$parser->parse_string($fileContent{$key});   
 		$suite					=	$test->findnodes('//'.ROOT.'/TestSuite/@name'); 
 		$branch					= 	StringHelper::getBranch($suite);
 	

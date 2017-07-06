@@ -1,10 +1,16 @@
+use strict;
+use warnings;
+
 use Switch;
 use XML::DOM;
+use XML::DOM::NodeList;
 
 require "dependency.pm";
 
 
 package XMLHelper;
+
+	my %attributeList;
 
 	#build an attribute with value and name 
 	sub buildAttribute {
@@ -47,7 +53,7 @@ package XMLHelper;
 	
 		return $attrValue ;
 	}# getOnlyValueOfAttr
-	
+		
 	#method which sends 
 	sub getXPathQueryBoosttest {
 
@@ -76,19 +82,33 @@ package XMLHelper;
 	#https://stackoverflow.com/questions/8733808/perl-parsing-using-sax
 	
 	
+	sub allAttributes {
+	
+	my $elem 	= shift;
+	my @attributes;	
+
+	 #first attribute	
+	 if (WhoIS($elem) eq 'XML_ELEMENT_NODE' ) {
+
+		if ($elem->hasAttributes()) {  
+			@attributes = $elem->attributes();
+			#print $attributes[0]->value."\n";
+			return @attributes;
+		}
+
+	 }
+	 return undef $elem;
+	}#end all attributes sub
+	
 	
 	#sub Wrap the nextNodeRek function
 	sub nextNode {
-	
 		my $node = shift;
-	
-		if (WhoIS($node) eq 'XML_DOCUMENT_NODE') {
-		$node = $node->firstChild;
+		if (WhoIS($node) eq 'XML_DOCUMENT_NODE' and  $node->firstChild) {
+			$node = $node->firstChild;
 		}
-		
-		return nextNodeRek($node,$node);	
+		return nextNodeRek ($node, $node);
 	}
-	
 	
 	#get node in xml tree
 	#get all first 
