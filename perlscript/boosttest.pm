@@ -8,6 +8,7 @@ use 		strict;
 use 		warnings;
 
 use lib "../perlscript/";
+use experimental 'smartmatch'; #to search with that ~~
 
 #use constants
 use 		constant FRAMEWORK 			=> "boosttest"; 
@@ -21,76 +22,7 @@ use 		Switch;
 
 require 	"dependency.pm"; #this source holds every dependency
  
-sub buildAttributes {
 
-	my $caseName 	= shift; 	
-	my $caseFile	= shift;	
-	my $caseLine	= shift;	
-	my $testTime	= shift;	
-	my $result;
-
-	if (defined $caseName and defined $caseFile and defined $caseLine and defined $testTime) {
-	
-		$caseName		= XMLHelper::buildAttribute('case', $caseName);  
-		$caseLine		= StringHelper::withoutWhitespaces('case'.$caseLine); 
-		$testTime		= XMLHelper::buildAttribute('testingTime',$testTime); 
-
-		$result 	= ' '.$caseName.' '.$caseLine.' '.$caseFile.' '.$testTime;
-	}
-	else {
-		$result		= "SOME VALUES ARE UNDEFINED";
-	}
-	
-	return $result;
-}
-
-sub buildElements {
-	
-	my %testCaseInfoInit		= %{shift()};   	#get first argument
-	my %testCaseInfoLine 	 	= %{shift()};
-	my %testCaseTestingTime		= %{shift()};
-	my @caseLines           	= @{shift()}; 
-	my @caseFiles           	= @{shift()};
-		
-	my @testCaseInfoResult   	= ();
-	
-	my $info;
-	my $lineIndex	= 0; 			 
-	my $key;
-	
-	foreach $key (keys %testCaseInfoInit) {
-		
-			$info			 	= "";	
-			
-			#go trough the hash entry by entry 
-			for (my $i = 0; $i < scalar @{$testCaseInfoInit{$key}}; $i++) {
-			
-			
-				#get the info string in the right shape (without Whitespaces and as an string)
-				$info 		=  	@{$testCaseInfoInit{$key}}[$i]->to_literal;
-				$info 		= 	StringHelper::withoutWhitespaces ($info);
-			
-					#HINT could add more cases 
-					#CASE check haspassed
-					if ($info =~ /check/  and $info =~ /haspassed/ ) {
-                		
-						#remove those two keywords checked and haspassed in the string	
-						$info =  StringHelper::withoutCheckedPassed($info); 																				
-																										#name -      file               line                 time
-						$info = '<test-case-passed '.@{$testCaseInfoLine{$key}}[$i].buildAttributes($key, $caseFiles[$lineIndex],$caseLines[$lineIndex],$testCaseTestingTime{$key}).'>'.$info.'</test-case-passed>' ;
-						push @testCaseInfoResult, $info;
-					}
-			
-			}#for end	
-            $lineIndex++;					
-	}#foreach end
-	return "@testCaseInfoResult";	
-}  
-  
-#** @method Worker
-#   
-#*   
-  
 sub Worker {
 
     print "Worker out of Boost Test\n";
@@ -99,10 +31,21 @@ sub Worker {
     my $parser     			= XML::LibXML->new();
     
 	my $test;
+	my $node;
+	my $tempNode;
+	my $info;
+	my $passed = '1';
+	my @attributes;
+	my @testcases;
+	
+	my $name;
+	my $fileName;
+	my $string;
+	my $caseResult;
+	my $line;
+	
 	my $key;
-	my $caseName;
-	my $suite;	
-	my $branch;				#build of Master Test Suite
+	my $testcase;
  
 	my %fileContent;
 	%fileContent =  %{shift()};
@@ -115,38 +58,70 @@ sub Worker {
 		#*
 				
 		$test   				= 	$parser->parse_string($fileContent{$key});   
-		$suite					=	$test->findnodes('//'.ROOT.'/TestSuite/@name'); 
-		$branch					= 	StringHelper::getBranch($suite);
-	
-		$result			 		.=  XMLHelper::getFileElement($key, 'open');  
-		 
-		foreach my $case ($test->findnodes('/'.ROOT.'/TestSuite')) {
-  		
-				#get the attributes:  	<Testcase  'name' , 'line' , 'file'>   
-				my @caseNames      		= $case->findnodes('//TestCase/@name');				
-				my @caseLines			= $case->findnodes('//TestCase/@line'); 
-				my @caseFiles       	= $case->findnodes('//TestCase/@file');
 		
-				my %info;
-				my %line;
-				my %testTime;
+		$node = $test;
+		
+		$node = XMLHelper::nextNode($node);
+
+		while (XMLHelper::nextNode($node)) {
+			
+			if ($node->nodeName eq 'TestCase') {
+			
+				$fileName = "file='".$key."'"; 
+			
+				if (XMLHelper::allAttributes($node)) {
 					
-				for (my $j = 0; $j < scalar @caseNames; $j++) {
-		
-					$caseName = XMLHelper::getOnlyValueOfAttr ('name', $caseNames[$j]);
-		
-				    #for every case name look for the infos
-				    $info{$caseName} 	 		= $case->findnodes(XMLHelper::getXPathQueryBoosttest($caseName,'info')); 		#fills the %info  var
-				    #for every info look for the line attribute
-				    $line{$caseName}    		= $case->findnodes(XMLHelper::getXPathQueryBoosttest($caseName,'infoline'));	#fills the %line var
-				    #for every case name look for the testing Time
-				    $testTime{$caseName} 		= $case->findnodes(XMLHelper::getXPathQueryBoosttest($caseName,'testtime'));	#fills the %testTime var 
-				    
-				   
-			}#end for
-			$result 	   .=  buildElements (\%info, \%line, \%testTime, \@caseLines, \@caseFiles);	
-		}#end foreach
-		$result  		.= XMLHelper::getFileElement($key, 'close');
+					@attributes = XMLHelper::allAttributes($node);
+					for (my $i = 0; $i < scalar @attributes; $i++) {
+					   
+						if ($attributes[$i]->name eq 'name') {
+							$name =  "name='".$attributes[$i]->value."'";
+						}
+
+						if ($attributes[$i]->name eq 'line') {
+							$line = "line='".$attributes[$i]->value."'";
+						}
+					}#end for 	
+				}#end if attributes
+				
+				$tempNode 		= $node;
+				
+				while (XMLHelper::nextNode($tempNode)->nodeName eq "Info" ) {
+					
+					$tempNode 	= XMLHelper::nextNode($tempNode);
+					$info 		= StringHelper::withoutWhitespaces ($tempNode->to_literal);
+					
+					if ($info =~ /check/  and $info =~ /haspassed/ ) {
+						$passed = '1';
+					}	
+					else {
+						$passed = undef;
+					}
+				}#end while  
+				
+				if ($passed) {
+					$caseResult = "result='success'";
+				}
+				else {
+					$caseResult	= "result='failure'";
+				}
+				
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult."/>\n\r";	
+				
+				#https://stackoverflow.com/questions/2860226/how-can-i-check-if-a-perl-array-contains-a-particular-value			
+				if ( not ($testcase ~~ @testcases)) {
+					print $testcase."\n";
+					$result .= $testcase;
+					push @testcases, $testcase;
+				}
+				else {
+				}
+			}#end if test-case
+			
+			#optimazion you can overjump this or that
+			$node = XMLHelper::nextNode($node); 
+		}#end while 
+
 	}#end foreach	
 		
 	$result   	.= CLOSEROOTELEMENT;

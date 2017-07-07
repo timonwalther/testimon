@@ -1,5 +1,8 @@
-<?xml version="1.0"?><test-framework name="nunit"><test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("60","70","130",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("40","50","90",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddTwoNumbers' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.FailToAddTwoNumbers' file='results-example-nuint.xml' line='' result='failure'/>
+<?xml version="1.0"?><test-framework name="boosttest"><test-case name='async_out_future' file='async_fut.xml' line='32' result='success'/>
+<test-case name='args' file='args_cmd.xml' line='28' result='success'/>
+<test-case name='cmd' file='args_cmd.xml' line='75' result='success'/>
+<test-case name='sync_io' file='bind_stderr.xml' line='43' result='success'/>
+<test-case name='async_io' file='bind_stderr.xml' line='80' result='success'/>
+<test-case name='nul' file='bind_stderr.xml' line='103' result='success'/>
+<test-case name='file_io' file='bind_stderr.xml' line='125' result='success'/>
 </test-framework>

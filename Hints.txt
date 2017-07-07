@@ -84,13 +84,32 @@ $root = $test->getDocumentElement();
 $node = $root->hasChildNodes();
 __________________________________________________________________
 multi-line comments with perl
-___________________________________________________________________
+__________________________________________________________________
 
 =head1
 comment...
 =cut
 
 works with notepad++ with an .pm suffix in that case
+
+__________________________________________________________________
+EXPERIENCE - PHP Upload - Jquery in Case of testimon 
+__________________________________________________________________
+
+It was interessting during the upload. There are 2 files per upload, call the upload.php
+and afterwards call it again for the next and so on. A problem came through the Jquery GUI.
+In the moment the site was loading, jquery for fileupload was set and no one could change a thing.
+I would give the URL to the uploadscript because it should transporte a variable for the given framework.
+So i load this part after i set the URL with the parameter.
+
+__________________________________________________________________
+EXPERIENCE - Perl LibXML 
+__________________________________________________________________
+
+If you search with Xpath - expressions with method "findnodes" you can't work with methods
+like "haveChildNodes()".    
+
+
 
 
 

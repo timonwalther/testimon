@@ -287,7 +287,7 @@
                                     currentElem  = infoIterator.next();
 
                                         while (!currentElem.done) {
-                                            temp        += '<h4 style="margin-left:15px;"> File: ' + currentElem.value.name + '</h4>'+ currentElem.value.view +'<br/>';
+                                            temp        += '<h4 style="margin-left:15px;"> Test-case: ' + currentElem.value.name + '</h4>'+ currentElem.value.view +'<br/>';
                                             currentElem = infoIterator.next();
                                         }
 

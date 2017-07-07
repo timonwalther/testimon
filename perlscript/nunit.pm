@@ -21,9 +21,7 @@ use 		experimental 'smartmatch'; #to search with that ~~
 use 		XML::LibXML;
 
 require 	"dependency.pm"; #this source holds every dependency
- 
- 
-  
+   
 #** @method Worker
 #   
 #*   
@@ -54,7 +52,7 @@ sub Worker {
 	
 	
 	my @testcases;
-	my @attributes;	
+	my @attributes;
 	
 	
 	my $name;
@@ -79,8 +77,6 @@ sub Worker {
 		$node = XMLHelper::nextNode($node);
 
 		while (XMLHelper::nextNode($node)) {
-			
-			$node = XMLHelper::nextNode($node); 
 			
 			if ($node->nodeName eq 'test-case') {
 			
@@ -117,10 +113,10 @@ sub Worker {
 					push @testcases, $testcase;
 				}
 				else {
-					print "hiu\n";
 				}
 			}#end if test-case
 					
+			$node = XMLHelper::nextNode($node); 
 			
 			#if (XMLHelper::allAttributes($node)) {
 			#	@attributes = XMLHelper::allAttributes($node);
