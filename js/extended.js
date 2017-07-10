@@ -1,6 +1,5 @@
 	//used in   ->   "mixedlibs/bootstrap-fileinput/js/fileinput.js"
 	
-
 	//addendum M&W
     var Iterator, GUIUpTest, TESTTree, ToggleScriptBuilder;
 
@@ -34,34 +33,42 @@
             } //end makeIterator
     }//Iterator 
 
+	
+	TESTTree1  = new function () {
+		
+		
+		
+		
+		
+		
+	}
+
+	
+	
     TESTTree = new function () {
 
         this.topInfos           =   []; 
         this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
         this.Infos              =   [];
 		
-		
         //constants
 		this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
 		this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	
         this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
 
-
         this.buildCaseRow           = function (id ,caseName, testingTime, caseline ) {
 
             if (typeof(id) != undefined && typeof (caseName) != undefined && typeof(testingTime) != undefined && typeof(caseline) != undefined) {
                 return '<div style="margin-left:50px;"><a href="' + id + '"><strong>Test-Case:</strong>' 
-                        + caseName      + '- with time ' 
-                        + testingTime   + 'ms -  in line ' 
+                        + caseName      + ' - with time ' 
+                        + testingTime   + ' ms -  in line ' 
 				        + caseline      + '</a></div>';     
             }
             else 
                 return 'UNDEFINED TEST CASE VALUES';   
+        }//end buildCaseRow
 
-        }
-
-
-        this.buildView = function (root, itemsLen) {
+        this.buildView              = function (root, itemsLen) {
 
             //arrays
             var cases, infos;               
@@ -77,65 +84,32 @@
             parent                  = root;
             passed                  = true;
             
-
             cases                   = [];
             infos                   = [];
 
             for (var i=0; i < itemsLen; i++ ) {
 
-                    nodeFile			    = root.childNodes[i];  
+                    nodeCase	    = root.childNodes[i]; 
 
-                    if (nodeFile.hasAttributes) {   
-    
-                        if (nodeFile.parentNode != parent.nodeName) {
-                            parent = nodeFile;     
+                    if (nodeCase.hasAttributes) {
+     
+                        infos.push ({info: nodeCase.nodeName});    
+                        nodeCase.getAttribute("result") != "success" ? passed = false : passed = passed; 
 
-                         }   
-                            //for every file element look for the testcases and testcaseinfos
-                            for (var j= 0; j < nodeFile.childNodes.length; j++) {
-
-                                nodeCase    =  nodeFile.childNodes[j]; 
-                                fileName    =  nodeFile.nodeName;
-
-                                if (nodeCase.hasAttributes) {
-                          
-                                   if (caseName != nodeCase.getAttribute("case")) {
-
-                                        //new caseName and not the first one, then close table element
-                                        j > 0 ?  ViewContent += '</tbody></table>': ViewContent = ViewContent;  
-
-                                        caseName = nodeCase.getAttribute("case");
-
-                                        //fill the array of testcases        
-                                        cases.push ({name: caseName, testingTime: nodeCase.getAttribute("testingTime"), line: nodeCase.getAttribute("caseline") }); 
-
-										id 		        = 	fileName + caseName;
-
-                                        ViewContent     +=  TESTTree.buildCaseRow (id ,caseName, nodeCase.getAttribute("testingTime"), nodeCase.getAttribute("caseline"))
-                                                        +   ToggleScriptBuilder.makeScript(id, 'tab')
-                                                        +   '<table id="tab'+ id +'" class="table" hidden>' + TESTTree.InfoTableHead ; 
+                                    if (passed) {
+                                        ViewContent         += '<tr class="success"><td>' + nodeCase.getAttribute("name") + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>'; 
+                                    }         
+                                    else {
+                                        ViewContent         += '<tr class="danger"><td>' + nodeCase.getAttribute("name") + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
                                     }
-
-                                    //fill the array of elements whose are maybe "test-case-passed" or "test-case-not-passed"    
-                                    infos.push ({info: nodeCase.nodeName});    
-                                    nodeCase.nodeName != "test-case-passed" ? passed = false : passed = passed; 
-
-                                    if (passed)      
-                                        ViewContent         += '<tr class="success"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';    
-                                    else 
-                                        ViewContent         +=  '<tr class="danger"><td>' + nodeCase.childNodes[0].nodeValue + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
-                                
-                                }   
-                            }//end inner for
+                          
 
                             content += '</tbody></table>';
-                            TESTTree.Infos.push ({name: nodeFile.nodeName, case: cases, info: infos, view: ViewContent, error: false, pass: passed});
+                            TESTTree.Infos.push ({name: nodeCase.getAttribute("name"), case: cases, info: infos, view: ViewContent, error: false, pass: passed});
                     } //end if
-
                     //unset the ViewContent var 
                     ViewContent = '';
-
-			    } //end for
+                }//end for            
         }//end buildFirstLevel      
 
     } //end TESTTree object 
@@ -179,17 +153,14 @@
 
                 this.browserCheckXML   = function (rawFile) {
 
-
                     var parser, xmlDoc;    
 
-                    if (window.DOMParser)
-				    {
+                    if (window.DOMParser)   {
 									parser 				= new DOMParser();
 									xmlDoc 				= parser.parseFromString(rawFile.responseText, "text/xml");	
 					}
-					else // Internet Explorer  
-                    {
-									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");
+					else                    {  // Internet Explorer
+									xmlDoc 				= new ActiveXObject("Microsoft.XMLDOM");  
 									xmlDoc.async 		= true;
 									xmlDoc.loadXML(rawFile.responseText);
 					}            
@@ -256,12 +227,12 @@
 				
 
 				//http://stackoverflow.com/questions/4249030/load-javascript-async-then-check-dom-loaded-before-executing-callback
-				this.readXmlFormatFile = function ()
+				this.readXmlFormatFile  = function ()
 				{
 					
-					var rawFile,xmlDoc;
+					var rawFile, xmlDoc;
 
-					rawFile = new XMLHttpRequest();
+					rawFile             = new XMLHttpRequest();
 					
 					//false -> synchron request  - true asynchron request
                     //https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
@@ -271,8 +242,7 @@
 						
 						if(rawFile.readyState === 4 && (rawFile.status === 200 || rawFile.status == 0))
 						{		
-
-                                    xmlDoc = GUIUpTest.browserCheckXML(rawFile); 
+                                    xmlDoc              = GUIUpTest.browserCheckXML(rawFile); 
 
 									var temp, id, infoIterator, currentElem;
 									temp                = ''; 
@@ -281,12 +251,13 @@
                                     GUIUpTest.testFrameworkName	        = xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");                        
                                     
                                     //got first element
-                                    TESTTree.buildView(xmlDoc.getElementsByTagName("test-framework")[0],xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
+                                    TESTTree.buildView(xmlDoc.getElementsByTagName("test-framework")[0], xmlDoc.getElementsByTagName("test-framework")[0].childNodes.length);
 
                                     infoIterator = Iterator.makeIterator(TESTTree.Infos);
                                     currentElem  = infoIterator.next();
 
                                         while (!currentElem.done) {
+                                            alert(currentElem.value);
                                             temp        += '<h4 style="margin-left:15px;"> Test-case: ' + currentElem.value.name + '</h4>'+ currentElem.value.view +'<br/>';
                                             currentElem = infoIterator.next();
                                         }
