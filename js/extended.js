@@ -8,13 +8,14 @@
         this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
 	    this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	    
 
-        this.makeScript = function (id, type)  { 
+        this.makeScript = function (id, type, linkMessage)  { 
 
         return  '<script>'          + ToggleScriptBuilder.ToggleScriptOne 
                                     + '.match(/'+ id +'/)) {' 
                                     + ToggleScriptBuilder.ToggleScriptDefault 
-                                    + 'if ($("#'+ type + id +'").is(":visible")) { $("#'+ type+ id +'").hide();}'
-                                    + 'else { $("#'+ type + id +'").show();}   }}); </script>';                                                         
+                                    + 'if ($("#'+ type + id +'").is(":visible")) { $("#'+ type + id +'").hide();}'
+                                    + 'else { $("#'+ type + id +'").show();}   }}); </script>'
+                                    + '<p style="margin-left: 15px;"><a href="#' + id + '">+</a>' + linkMessage + '-' + id + '</p>';                                                         
         } // makeScript method    
     } //ToggleScriptBuilder
 
@@ -31,87 +32,63 @@
                         }
                     }
             } //end makeIterator
-    }//Iterator 
-
-	
-	TESTTree1  = new function () {
-		
-		
-		
-		
-		
-		
-	}
-
-	
+    }//Iterator 	
 	
     TESTTree = new function () {
 
-        this.topInfos           =   []; 
-        this.caseInfos          =   [];    //is a struct which is composed of (1) testingTime (2) caseName (3) caseLine
-        this.Infos              =   [];
-		
+        this.Infos              =   [];		
         //constants
-		this.ToggleScriptOne	 	= '$("a").click(function (eventObject ) { var elem = $(this); if (elem.attr("href")';
-		this.ToggleScriptDefault 	= 'eventObject.preventDefault();';	
-        this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th></tr></thead><tbody>';
+        this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th><th>File</th></tr></thead><tbody>';
 
-        this.buildCaseRow           = function (id ,caseName, testingTime, caseline ) {
 
-            if (typeof(id) != undefined && typeof (caseName) != undefined && typeof(testingTime) != undefined && typeof(caseline) != undefined) {
-                return '<div style="margin-left:50px;"><a href="' + id + '"><strong>Test-Case:</strong>' 
-                        + caseName      + ' - with time ' 
-                        + testingTime   + ' ms -  in line ' 
-				        + caseline      + '</a></div>';     
-            }
-            else 
-                return 'UNDEFINED TEST CASE VALUES';   
-        }//end buildCaseRow
+        this.buildViewContent       = function () {   
+        }
 
-        this.buildView              = function (root, itemsLen) {
 
-            //arrays
-            var cases, infos;               
+
+        this.buildView              = function (root, itemsLen) {             
 
             //single vars
-            var nodeFile, nodeCase, parent, ViewContent, caseName, fileName, passed, id;
-	
-            nodeFile                = '';  
+            var nodeCase, ViewContent, passed, id;
+	  
             nodeCase                = '';
-            ViewContent             = '';
-            fileName                = '';  
+            ViewContent             = ''; 
 			id 						= '';
-            parent                  = root;
             passed                  = true;
             
-            cases                   = [];
-            infos                   = [];
-
             for (var i=0; i < itemsLen; i++ ) {
 
                     nodeCase	    = root.childNodes[i]; 
 
                     if (nodeCase.hasAttributes) {
-     
-                        infos.push ({info: nodeCase.nodeName});    
+
                         nodeCase.getAttribute("result") != "success" ? passed = false : passed = passed; 
 
+                            id = nodeCase.getAttribute("name");
+
+                            ViewContent +=  ToggleScriptBuilder.makeScript(id, 'tab', "Details") 
+                                            + '<table id="tab'+ id +'" class="table" hidden>'
+                                            + this.InfoTableHead;     
+
                                     if (passed) {
-                                        ViewContent         += '<tr class="success"><td>' + nodeCase.getAttribute("name") + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>'; 
+                                        ViewContent         += '<tr class="success"><td>' 
+                                                                + nodeCase.getAttribute("name") +   '</td> <td>'
+                                                                + nodeCase.getAttribute("line") +   '</td><td>'
+                                                                + nodeCase.getAttribute("file") +   '</td></tr>'; 
                                     }         
                                     else {
-                                        ViewContent         += '<tr class="danger"><td>' + nodeCase.getAttribute("name") + '</td> <td>'+ nodeCase.getAttribute("line") +'</td></tr>';             
+                                        ViewContent         += '<tr class="danger"><td>' 
+                                                                + nodeCase.getAttribute("name") +   '</td> <td>'
+                                                                + nodeCase.getAttribute("line") +   '</td><td>'
+                                                                + nodeCase.getAttribute("file") +   '</td></tr>';             
                                     }
-                          
-
-                            content += '</tbody></table>';
-                            TESTTree.Infos.push ({name: nodeCase.getAttribute("name"), case: cases, info: infos, view: ViewContent, error: false, pass: passed});
+                            ViewContent += '</tbody></table>';         
+                            TESTTree.Infos.push ({name: nodeCase.getAttribute("name"), view: ViewContent, error: false, pass: passed});
                     } //end if
                     //unset the ViewContent var 
                     ViewContent = '';
                 }//end for            
         }//end buildFirstLevel      
-
     } //end TESTTree object 
 
 	GUIUpTest = new function () {
@@ -128,7 +105,6 @@
 										+'<th> DATE </th>'
 										+'<th> VIA </th></tr></thead>';
 
-				
 				//path to perl generate format.xml file			
 				this.formatFilePath     = 'uploadfiles/newformats/format.xml';
 				
@@ -257,8 +233,7 @@
                                     currentElem  = infoIterator.next();
 
                                         while (!currentElem.done) {
-                                            alert(currentElem.value);
-                                            temp        += '<h4 style="margin-left:15px;"> Test-case: ' + currentElem.value.name + '</h4>'+ currentElem.value.view +'<br/>';
+                                            temp        += '<h4 style="margin-left:15px;"> Testcase: ' + currentElem.value.name + '</h4>' + currentElem.value.view + '<br/>';
                                             currentElem = infoIterator.next();
                                         }
 
@@ -278,8 +253,8 @@
 																                                  
 									id = "id"; //this is only for testing "id" isn't the final solution
         
-                                    GUIUpTest.testResult    +=  ToggleScriptBuilder.makeScript(id, 'di') 
-															+   '<a href="#'+ id +'">+</a> More Information <div id="di'+ id +'" hidden>' + temp + '</div></div>';  
+                                    GUIUpTest.testResult    +=  ToggleScriptBuilder.makeScript(id, 'di', "More Information") 
+															+   '<div id="di'+ id +'" hidden>' + temp + '</div></div>';  
 
 						}
                         else {
