@@ -1,9 +1,927 @@
-<?xml version="1.0"?><test-framework name="nunit"><test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("60","70","130",System.String[])' file='results_example_nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("40","50","90",System.String[])' file='results_example_nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddTwoNumbers' file='results_example_nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.FailToAddTwoNumbers' file='results_example_nuint.xml' line='' result='failure'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("60","70","130",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddingSeveralNumbers("40","50","90",System.String[])' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.AddTwoNumbers' file='results-example-nuint.xml' line='' result='success'/>
-<test-case name='Pickles.TestHarness.AdditionFeature.FailToAddTwoNumbers' file='results-example-nuint.xml' line='' result='failure'/>
+<?xml version="1.0"?><test-framework name="junit"><test-case name='Default user agent matches /CasperJS/' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Default user agent matches /plop/' file='junit_big_example.xml' line='' result='success' />
+<test-case name='alert event has been intercepted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Subject equals the expected value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.capture() captured a screenshot' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a page capture as base64' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a capture from a selector as base64' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a capture from a clipRect as base64' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() can click on a link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenClick() can click on a link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `href="javascript:` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `href="#"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `onclick=".*; return false"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an unobstrusive js handled link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `href="javascript:` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `href="#"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `onclick=".*; return false"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an unobstrusive js handled link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `href="javascript:` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `href="#"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `onclick=".*; return false"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an unobstrusive js handled link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `href="javascript:` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `href="#"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `onclick=".*; return false"` link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an unobstrusive js handled link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Mouse.down() has pressed button to the specified position' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Mouse.up() has released button to the specified position' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Mouse.move() has moved to the specified position' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() sets the focus on clicked element' file='junit_big_example.xml' line='' result='success' />
+<test-case name='confirmation received' file='junit_big_example.xml' line='' result='success' />
+<test-case name='confirmation message is ok' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getHTML() retrieves inner HTML by default' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getHTML() can retrieve outer HTML' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getElementAttribute() works as intended' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.base64encode() can retrieve base64 contents' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.download() downloads a file' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() handles passed argument context correcly' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() handles evaluation with no context passed' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts an object as arguments context' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts an array as arguments context' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts natural arguments context' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenEvaluate() sets args' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenEvaluate() sets args the same way evaluate() does' file='junit_big_example.xml' line='' result='success' />
+<test-case name='on() has set an event handler' file='junit_big_example.xml' line='' result='success' />
+<test-case name='emit() emits an event' file='junit_big_example.xml' line='' result='success' />
+<test-case name='setFilter() has set a filter' file='junit_big_example.xml' line='' result='success' />
+<test-case name='filter() filters a value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='filter() applies the correct context' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.exists() can check if an element exists' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fetchText() can retrieve text contents' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1.1.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1.1.1.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1.1.2.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 1.2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 3 sucessfully timed out' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 4' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 4.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 4.1.1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='step 5.2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='last step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill an input[type=text] form field' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill an input[type=password] form field' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill a textarea form field' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can pick a value from a select form field' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form checkbox' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form radio button 1/2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form radio button 2/2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can select a file to upload' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill a list of checkboxes' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getFormValues() retrieves filled values' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=email] field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=password] field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() textarea field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=checkbox] field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=radio] field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() select field was submitted' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() raises an exception when unable to fill a form' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() handles multiple forms' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fill() handles array syntax field names' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 1"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: #f1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='No element found matching selector: #f2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='__utils__ object is available in child frame' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 2"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: #f2' file='junit_big_example.xml' line='' result='success' />
+<test-case name='No element found matching selector: #f1' file='junit_big_example.xml' line='' result='success' />
+<test-case name='__utils__ object is available in other child frame' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 3"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS test frames"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() can retrieve a remote global variable' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() can retrieves a serializable object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() does not fail trying to encode an unserializable global' file='junit_big_example.xml' line='' result='success' />
+<test-case name='No response available on local page' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Checking existing header (case sensitive)' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Checking existing header (case insensitive)' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Checking unexisting header' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.back() can go back an history step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.forward() can go forward an history step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.history contains urls' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.history has the correct first url' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.options.onStepComplete() is called on step complete' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceRequested() retrieve a request object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceRequested() retrieve a valid request object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceReceived() retrieve a resource object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceReceived() retrieve a valid resource object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.sendKeys() sends keys to given input' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.sendKeys() sends keys to given textarea' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.log() adds a log entry' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.log() adds a log entry' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.log() adds a log entry at a given level' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.log() logged messages' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mousedown event' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mousedown event handled by unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseup event' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseup event handled by unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseover event' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseover event handled by unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseout event' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseout event handled by unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mousedown' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mousedown via unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseup' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseup via unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseover' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseover via unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseout' file='junit_big_example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseout via unobstrusive js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='page.error event has been caught OK' file='junit_big_example.xml' line='' result='success' />
+<test-case name='page.error retrieves correct stack trace' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected GET settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected POST settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected PUT settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected HTTP auth settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using GET' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using POST' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using PUT' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using HTTP auth' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected GET settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using GET' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected POST settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using POST' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected PUT settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using PUT' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected HTTP auth settings' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using HTTP auth' file='junit_big_example.xml' line='' result='success' />
+<test-case name='"popup.created" event is fired' file='junit_big_example.xml' line='' result='success' />
+<test-case name='"popup.created" event callback get a popup page instance' file='junit_big_example.xml' line='' result='success' />
+<test-case name='"popup.loaded" event is fired' file='junit_big_example.xml' line='' result='success' />
+<test-case name='"popup.loaded" is triggered when popup content is actually loaded' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.waitForPopup() waits for a popup being created' file='junit_big_example.xml' line='' result='success' />
+<test-case name='A popup has been added' file='junit_big_example.xml' line='' result='success' />
+<test-case name='A popup is a WebPage' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() switched to popup as current active one' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() has client utils injected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can perform assertions on the DOM' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can perform assertions on the DOM using XPath' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() has reverted to main page after using the popup' file='junit_big_example.xml' line='' result='success' />
+<test-case name='"popup.closed" event is fired' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Popup is removed when closed' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can use a regexp to identify popup' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.waitForPopup() waits when clicked on a link with target=_blank' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS test form"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='prompted value has been received' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() sets no custom header by default' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() can set a custom header' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.open() custom headers option is not persistent' file='junit_big_example.xml' line='' result='success' />
+<test-case name='only one resource found' file='junit_big_example.xml' line='' result='success' />
+<test-case name='two resources found' file='junit_big_example.xml' line='' result='success' />
+<test-case name='phantom image found via test RegExp' file='junit_big_example.xml' line='' result='success' />
+<test-case name='phantom image found via test Function' file='junit_big_example.xml' line='' result='success' />
+<test-case name='phantom image found via test String' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a first remote script on start' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a second remote script on start' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a really remote file on first step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a first remote script on second step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a second remote script on second step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a really remote file on second step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.start() started' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.start() can chain a next step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.start() opened the passed url' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.start() injects ClientUtils instance within remote DOM' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.then() can add a new step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can add a new step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can add a new step for opening, plus another step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.each() passes a contextualized index' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.then() added a new step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() opened a location and executed a step' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 200' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves a raw unicode URL' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves an escaped URL' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves a decoded URL' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.viewport() can change the width of page viewport' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.viewport() can change the height of page viewport' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.viewport() validates viewport size data' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.visible() can detect if an element is visible' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.visible() can detect if an element is invisible' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.waitWhileVisible() can wait while an element is visible' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.wait() can wait for a given amount of time' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.waitFor() can wait for something to happen' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.waitForText() can wait for text' file='junit_big_example.xml' line='' result='success' />
+<test-case name='XPath selector can find an element' file='junit_big_example.xml' line='' result='success' />
+<test-case name='XPath selector does not retrieve an unexistent element' file='junit_big_example.xml' line='' result='success' />
+<test-case name='selectXPath() shortcut can find an element as well' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Correct number of elements are found' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Clicking XPath works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() returns expected positional args array' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() returns expected options object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() does not return inexistant positional arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() does not return inexistant option' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if an arg is set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if an option is set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if a raw arg is set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if a raw option is set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve first positional arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve second positional arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if an arg is not set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() returns expected positional raw args array' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() returns expected raw options object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve first positional raw arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve second positional raw arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if a arw arg is set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='has() checks if a arw arg is not set' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve an option value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve boolean option flag' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() returns expected options raw object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve an option raw value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() retrieve boolean raw option flag' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() handles options with exotic names' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() handles raw options with exotic names' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() can cast a numeric option value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() can cast a float option value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() can cast a boolean value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() can get a flag value by its option name' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() dropped arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() dropped option' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() did not affect other args' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() did not affect other options' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() does not a raw numeric option value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() does not cast a raw float option value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='parse() does not cast a numeric value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() dropped raw arg' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() dropped raw option' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() did not affect other raw args' file='junit_big_example.xml' line='' result='success' />
+<test-case name='drop() did not affect other raw options' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes an empty string' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a word' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a null char' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes an utf8 string' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes song lyrics' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a file contents' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.exists() checks that an element exist' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.exists() checks that an element exist using XPath' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements within a given scope' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements using XPath within a given scope' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element within a given scope' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element using XPath within a given scope' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.processSelector() can process a CSS3 selector' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.processSelector() can process a XPath selector' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element name' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element attributes' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element html content' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element text' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element x pos' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element y pos' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element width' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element height' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element visibility' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element whole tag contents' file='junit_big_example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementsBounds() retrieves multiple elements boundaries' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.start() casper can start itself an open an url' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.fetchText() can retrieves text contents' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Casper.click() casper can click on a text link' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for /local/plop/foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for local/plop/foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for ./local/plop/foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:\local\plop\foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for D:\local\plop\foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for D:\local\plop\' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:\' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for /' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for /local/plop/foo.js' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for D:\local\plop\' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for c:\' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for c:' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for \\Server\Plop' file='junit_big_example.xml' line='' result='success' />
+<test-case name='file:// protocol does not set a HTTP status' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 101' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 102' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 118' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 201' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 202' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 203' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 204' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 205' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 206' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 207' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 210' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 300' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 301' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 302' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 303' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 304' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 305' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 307' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 310' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 400' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 401' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 402' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 403' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 404' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 405' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 406' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 407' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 408' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 409' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 410' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 411' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 412' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 413' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 414' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 415' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 416' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 417' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 418' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 422' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 423' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 424' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 425' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 426' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 449' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 450' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 500' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 501' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 502' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 503' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 504' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 505' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 507' file='junit_big_example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 509' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() returns an object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function name as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function body as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function args as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles named functions with arguments and body' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles functions with no arguments' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles functions with no body' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles anonymous functions with complex args passed' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles can filter comments in function args' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() processed a function' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() processed the function correctly' file='junit_big_example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() has issue #129 fixed' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Subject is strictly true' file='junit_big_example.xml' line='' result='success' />
+<test-case name='require() patched version can load a js module' file='junit_big_example.xml' line='' result='success' />
+<test-case name='require() patched version can load a coffeescript module' file='junit_big_example.xml' line='' result='success' />
+<test-case name='require() patched version can load a json module' file='junit_big_example.xml' line='' result='success' />
+<test-case name='findTestFiles() find test files and sort them' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTextExists() checks that page body contains text' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTextExist() checks that page body contains text [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTextDoesntExist() checks that page body doesn't contain provided text' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorHasText() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorDoesntHaveText() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assert() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTrue() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTruthy() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertFalsy() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertNot() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEquals() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEqual() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertNotEquals() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEval() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEvaluate() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEvalEquals() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertEvalEqual() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertExists() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertExist() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorExists() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorExist() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertDoesntExist() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertNotExist() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertHttpStatus() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertMatch() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertMatches() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertRaises() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertRaise() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertThrows() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertResourceExists() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertResourceExist() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTitle() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTitleMatch() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertTitleMatches() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertType() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertUrlMatch() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertUrlMatches() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertVisible() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertNotVisible() works as expected' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertInvisible() works as expected [alias]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with inputs' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with textarea' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with checkboxes' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with radios' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with selects' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with file inputs' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with check lists' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "number"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "string"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "object"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "array"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "undefined"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "null"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "function"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "domwindow"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "date"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "regexp"' file='junit_big_example.xml' line='' result='success' />
+<test-case name='cleanUrl() cleans an URL' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() null equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() null vs. undefined inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() string equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() string inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() number equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() number equality without implicit cast' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() number equality with cast' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() number inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() empty array equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() array equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() complex array equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() complex array inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() shuffled array inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() array length inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() empty object equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() object length equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() shuffled object keys equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() object inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() complex object equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() complex object inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() function equality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() function inequality' file='junit_big_example.xml' line='' result='success' />
+<test-case name='equals() arrays of objects' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fileExt() extract file extension' file='junit_big_example.xml' line='' result='success' />
+<test-case name='fillBlanks() fills blanks' file='junit_big_example.xml' line='' result='success' />
+<test-case name='getPropertyPath() gets a property using a path' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isArray() checks for an Array' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isClipRect() checks for a ClipRect' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isHTTPResource() checks for an HTTP resource' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isObject() checks for an Object' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isValidSelector() checks for a valid selector' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isWebPage() checks for a WebPage instance' file='junit_big_example.xml' line='' result='success' />
+<test-case name='isJsFile() checks for js file' file='junit_big_example.xml' line='' result='success' />
+<test-case name='mergeObjects() can merge objects' file='junit_big_example.xml' line='' result='success' />
+<test-case name='unique() computes unique values of an array' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Subject is truthy' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Evaluated function returns the expected value' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuites[duration]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="foo"][package="foo"]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="bar"][package="bar"]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="foo"][package="foo"][tests="1"][failures="0"] testcase[name="footext"]' file='junit_big_example.xml' line='' result='success' />
+<test-case name='should default path to an empty string' file='junit.xml' line='' result='failure' />
+<test-case name='should default consolidate to true' file='junit.xml' line='' result='success' />
+<test-case name='Default user agent matches /CasperJS/' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Default user agent matches /plop/' file='junit-big-example.xml' line='' result='success' />
+<test-case name='alert event has been intercepted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Subject equals the expected value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.capture() captured a screenshot' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a page capture as base64' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a capture from a selector as base64' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.captureBase64() rendered a capture from a clipRect as base64' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() can click on a link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenClick() can click on a link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `href="javascript:` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `href="#"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an `onclick=".*; return false"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() can click an unobstrusive js handled link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `href="javascript:` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `href="#"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an `onclick=".*; return false"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() has clicked an unobstrusive js handled link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `href="javascript:` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `href="#"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an `onclick=".*; return false"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() can click an unobstrusive js handled link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `href="javascript:` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `href="#"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an `onclick=".*; return false"` link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.clickLabel() has clicked an unobstrusive js handled link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Mouse.down() has pressed button to the specified position' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Mouse.up() has released button to the specified position' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Mouse.move() has moved to the specified position' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() sets the focus on clicked element' file='junit-big-example.xml' line='' result='success' />
+<test-case name='confirmation received' file='junit-big-example.xml' line='' result='success' />
+<test-case name='confirmation message is ok' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getHTML() retrieves inner HTML by default' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getHTML() can retrieve outer HTML' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getElementAttribute() works as intended' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.base64encode() can retrieve base64 contents' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.download() downloads a file' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() handles passed argument context correcly' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() handles evaluation with no context passed' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts an object as arguments context' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts an array as arguments context' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.evaluate() accepts natural arguments context' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenEvaluate() sets args' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenEvaluate() sets args the same way evaluate() does' file='junit-big-example.xml' line='' result='success' />
+<test-case name='on() has set an event handler' file='junit-big-example.xml' line='' result='success' />
+<test-case name='emit() emits an event' file='junit-big-example.xml' line='' result='success' />
+<test-case name='setFilter() has set a filter' file='junit-big-example.xml' line='' result='success' />
+<test-case name='filter() filters a value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='filter() applies the correct context' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.exists() can check if an element exists' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fetchText() can retrieve text contents' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1.1.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1.1.1.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1.1.2.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 1.2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 3 sucessfully timed out' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 4' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 4.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 4.1.1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='step 5.2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='last step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill an input[type=text] form field' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill an input[type=password] form field' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill a textarea form field' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can pick a value from a select form field' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form checkbox' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form radio button 1/2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can check a form radio button 2/2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can select a file to upload' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() can fill a list of checkboxes' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getFormValues() retrieves filled values' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=email] field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=password] field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() textarea field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=checkbox] field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() input[type=radio] field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() select field was submitted' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() raises an exception when unable to fill a form' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() handles multiple forms' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fill() handles array syntax field names' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 1"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: #f1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='No element found matching selector: #f2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='__utils__ object is available in child frame' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 2"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: #f2' file='junit-big-example.xml' line='' result='success' />
+<test-case name='No element found matching selector: #f1' file='junit-big-example.xml' line='' result='success' />
+<test-case name='__utils__ object is available in other child frame' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS frame 3"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS test frames"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() can retrieve a remote global variable' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() can retrieves a serializable object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getGlobal() does not fail trying to encode an unserializable global' file='junit-big-example.xml' line='' result='success' />
+<test-case name='No response available on local page' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Checking existing header (case sensitive)' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Checking existing header (case insensitive)' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Checking unexisting header' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.back() can go back an history step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.forward() can go forward an history step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.history contains urls' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.history has the correct first url' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.options.onStepComplete() is called on step complete' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceRequested() retrieve a request object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceRequested() retrieve a valid request object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceReceived() retrieve a resource object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.options.onResourceReceived() retrieve a valid resource object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.sendKeys() sends keys to given input' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.sendKeys() sends keys to given textarea' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.log() adds a log entry' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.log() adds a log entry' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.log() adds a log entry at a given level' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.log() logged messages' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mousedown event' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mousedown event handled by unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseup event' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseup event handled by unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseover event' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseover event handled by unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseout event' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() can dispatch a mouseout event handled by unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mousedown' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mousedown via unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseup' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseup via unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseover' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseover via unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseout' file='junit-big-example.xml' line='' result='success' />
+<test-case name='CasperUtils.mouseEvent() triggered mouseout via unobstrusive js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='page.error event has been caught OK' file='junit-big-example.xml' line='' result='success' />
+<test-case name='page.error retrieves correct stack trace' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected GET settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected POST settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected PUT settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() used the expected HTTP auth settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using GET' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using POST' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using PUT' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() can open and load a location using HTTP auth' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected GET settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using GET' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected POST settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using POST' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected PUT settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using PUT' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() used the expected HTTP auth settings' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can open and load a location using HTTP auth' file='junit-big-example.xml' line='' result='success' />
+<test-case name='"popup.created" event is fired' file='junit-big-example.xml' line='' result='success' />
+<test-case name='"popup.created" event callback get a popup page instance' file='junit-big-example.xml' line='' result='success' />
+<test-case name='"popup.loaded" event is fired' file='junit-big-example.xml' line='' result='success' />
+<test-case name='"popup.loaded" is triggered when popup content is actually loaded' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.waitForPopup() waits for a popup being created' file='junit-big-example.xml' line='' result='success' />
+<test-case name='A popup has been added' file='junit-big-example.xml' line='' result='success' />
+<test-case name='A popup is a WebPage' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() switched to popup as current active one' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() has client utils injected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can perform assertions on the DOM' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can perform assertions on the DOM using XPath' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() has reverted to main page after using the popup' file='junit-big-example.xml' line='' result='success' />
+<test-case name='"popup.closed" event is fired' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Popup is removed when closed' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.withPopup() can use a regexp to identify popup' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.waitForPopup() waits when clicked on a link with target=_blank' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Page title is: "CasperJS test form"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='prompted value has been received' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() sets no custom header by default' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() can set a custom header' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.open() custom headers option is not persistent' file='junit-big-example.xml' line='' result='success' />
+<test-case name='only one resource found' file='junit-big-example.xml' line='' result='success' />
+<test-case name='two resources found' file='junit-big-example.xml' line='' result='success' />
+<test-case name='phantom image found via test RegExp' file='junit-big-example.xml' line='' result='success' />
+<test-case name='phantom image found via test Function' file='junit-big-example.xml' line='' result='success' />
+<test-case name='phantom image found via test String' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a first remote script on start' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a second remote script on start' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a really remote file on first step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a first remote script on second step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a second remote script on second step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.includeRemoteScripts() includes a really remote file on second step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.start() started' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.start() can chain a next step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.start() opened the passed url' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.start() injects ClientUtils instance within remote DOM' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.then() can add a new step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can add a new step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() can add a new step for opening, plus another step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.each() passes a contextualized index' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.then() added a new step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.thenOpen() opened a location and executed a step' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 200' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves a raw unicode URL' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves an escaped URL' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.getCurrentUrl() retrieves a decoded URL' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.viewport() can change the width of page viewport' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.viewport() can change the height of page viewport' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.viewport() validates viewport size data' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.visible() can detect if an element is visible' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.visible() can detect if an element is invisible' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.waitWhileVisible() can wait while an element is visible' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.wait() can wait for a given amount of time' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.waitFor() can wait for something to happen' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.waitForText() can wait for text' file='junit-big-example.xml' line='' result='success' />
+<test-case name='XPath selector can find an element' file='junit-big-example.xml' line='' result='success' />
+<test-case name='XPath selector does not retrieve an unexistent element' file='junit-big-example.xml' line='' result='success' />
+<test-case name='selectXPath() shortcut can find an element as well' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Correct number of elements are found' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Clicking XPath works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() returns expected positional args array' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() returns expected options object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() does not return inexistant positional arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() does not return inexistant option' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if an arg is set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if an option is set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if a raw arg is set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if a raw option is set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve first positional arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve second positional arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if an arg is not set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() returns expected positional raw args array' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() returns expected raw options object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve first positional raw arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve second positional raw arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if a arw arg is set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='has() checks if a arw arg is not set' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve an option value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve boolean option flag' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() returns expected options raw object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve an option raw value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() retrieve boolean raw option flag' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() handles options with exotic names' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() handles raw options with exotic names' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() can cast a numeric option value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() can cast a float option value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() can cast a boolean value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() can get a flag value by its option name' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() dropped arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() dropped option' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() did not affect other args' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() did not affect other options' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() does not a raw numeric option value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() does not cast a raw float option value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='parse() does not cast a numeric value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() dropped raw arg' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() dropped raw option' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() did not affect other raw args' file='junit-big-example.xml' line='' result='success' />
+<test-case name='drop() did not affect other raw options' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes an empty string' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a word' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a null char' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes an utf8 string' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes song lyrics' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.encode() encodes and decodes a file contents' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.exists() checks that an element exist' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.exists() checks that an element exist using XPath' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements within a given scope' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findAll() can find matching DOM elements using XPath within a given scope' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element within a given scope' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.findOne() can find a matching DOM element using XPath within a given scope' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.processSelector() can process a CSS3 selector' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.processSelector() can process a XPath selector' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element name' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element attributes' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element html content' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element text' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element x pos' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element y pos' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element width' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element height' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element visibility' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementInfo() retrieves element whole tag contents' file='junit-big-example.xml' line='' result='success' />
+<test-case name='ClientUtils.getElementsBounds() retrieves multiple elements boundaries' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.start() casper can start itself an open an url' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.fetchText() can retrieves text contents' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Casper.click() casper can click on a text link' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for /local/plop/foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for local/plop/foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for ./local/plop/foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:\local\plop\foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for D:\local\plop\foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for D:\local\plop\' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:\' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.dirname() does its job for c:' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for /' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for /local/plop/foo.js' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for D:\local\plop\' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for c:\' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for c:' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fs.isWindows() does its job for \\Server\Plop' file='junit-big-example.xml' line='' result='success' />
+<test-case name='file:// protocol does not set a HTTP status' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 101' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 102' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 118' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 201' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 202' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 203' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 204' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 205' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 206' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 207' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 210' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 300' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 301' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 302' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 303' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 304' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 305' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 307' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 310' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 400' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 401' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 402' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 403' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 404' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 405' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 406' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 407' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 408' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 409' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 410' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 411' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 412' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 413' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 414' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 415' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 416' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 417' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 418' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 422' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 423' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 424' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 425' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 426' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 449' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 450' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 500' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 501' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 502' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 503' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 504' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 505' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 507' file='junit-big-example.xml' line='' result='success' />
+<test-case name='HTTP status code is: 509' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() returns an object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function name as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function body as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() process function args as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles named functions with arguments and body' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles functions with no arguments' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles functions with no body' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles anonymous functions with complex args passed' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.extract() handles can filter comments in function args' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() processed a function' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() processed the function correctly' file='junit-big-example.xml' line='' result='success' />
+<test-case name='FunctionArgsInjector.process() has issue #129 fixed' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Subject is strictly true' file='junit-big-example.xml' line='' result='success' />
+<test-case name='require() patched version can load a js module' file='junit-big-example.xml' line='' result='success' />
+<test-case name='require() patched version can load a coffeescript module' file='junit-big-example.xml' line='' result='success' />
+<test-case name='require() patched version can load a json module' file='junit-big-example.xml' line='' result='success' />
+<test-case name='findTestFiles() find test files and sort them' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTextExists() checks that page body contains text' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTextExist() checks that page body contains text [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTextDoesntExist() checks that page body doesn't contain provided text' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorHasText() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorDoesntHaveText() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assert() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTrue() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTruthy() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertFalsy() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertNot() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEquals() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEqual() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertNotEquals() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEval() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEvaluate() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEvalEquals() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertEvalEqual() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertExists() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertExist() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorExists() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertSelectorExist() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertDoesntExist() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertNotExist() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertHttpStatus() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertMatch() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertMatches() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertRaises() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertRaise() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertThrows() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertResourceExists() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertResourceExist() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTitle() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTitleMatch() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertTitleMatches() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertType() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertUrlMatch() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertUrlMatches() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertVisible() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertNotVisible() works as expected' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertInvisible() works as expected [alias]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with inputs' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with textarea' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with checkboxes' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with radios' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with selects' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with file inputs' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Tester.assertField() works as expected with check lists' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "number"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "string"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "object"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "array"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "undefined"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "null"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "function"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "domwindow"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "date"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='betterTypeOf() detects expected type "regexp"' file='junit-big-example.xml' line='' result='success' />
+<test-case name='cleanUrl() cleans an URL' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() null equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() null vs. undefined inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() string equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() string inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() number equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() number equality without implicit cast' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() number equality with cast' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() number inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() empty array equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() array equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() complex array equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() complex array inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() shuffled array inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() array length inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() empty object equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() object length equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() shuffled object keys equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() object inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() complex object equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() complex object inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() function equality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() function inequality' file='junit-big-example.xml' line='' result='success' />
+<test-case name='equals() arrays of objects' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fileExt() extract file extension' file='junit-big-example.xml' line='' result='success' />
+<test-case name='fillBlanks() fills blanks' file='junit-big-example.xml' line='' result='success' />
+<test-case name='getPropertyPath() gets a property using a path' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isArray() checks for an Array' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isClipRect() checks for a ClipRect' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isHTTPResource() checks for an HTTP resource' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isObject() checks for an Object' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isValidSelector() checks for a valid selector' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isWebPage() checks for a WebPage instance' file='junit-big-example.xml' line='' result='success' />
+<test-case name='isJsFile() checks for js file' file='junit-big-example.xml' line='' result='success' />
+<test-case name='mergeObjects() can merge objects' file='junit-big-example.xml' line='' result='success' />
+<test-case name='unique() computes unique values of an array' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Subject is truthy' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Evaluated function returns the expected value' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuites[duration]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="foo"][package="foo"]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="bar"][package="bar"]' file='junit-big-example.xml' line='' result='success' />
+<test-case name='Found an element matching: testsuite[name="foo"][package="foo"][tests="1"][failures="0"] testcase[name="footext"]' file='junit-big-example.xml' line='' result='success' />
 </test-framework>

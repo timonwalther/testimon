@@ -107,8 +107,7 @@ sub Worker {
 				}
 				
 				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult."/>\n\r";	
-				
-				#https://stackoverflow.com/questions/2860226/how-can-i-check-if-a-perl-array-contains-a-particular-value			
+						
 				if ( not ($testcase ~~ @testcases)) {
 					print $testcase."\n";
 					$result .= $testcase;

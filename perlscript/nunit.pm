@@ -13,7 +13,6 @@ use 		constant FRAMEWORK 			=> "nunit";
 use 		constant ROOTXMLELEMENT 	=> '<?xml version="1.0"?><test-framework name="'.FRAMEWORK.'">';
 use 		constant CLOSEROOTELEMENT	=> '</test-framework>';
 use 		constant PATHNEWFILE		=> '../uploadfiles/newformats/format.xml';	
-use 		constant ROOT				=> 'test-results';
 
 #use constructs 
 use 		Switch;
@@ -32,14 +31,9 @@ sub Worker {
   
     my $result 				= ROOTXMLELEMENT; 
     my $parser     			= XML::LibXML->new();
-    
 	my $test_str;
-	my $test_fil;
 	my $key;
-	my $testcase;
-	my $results;	
-	my $branch;				
-	
+	my $testcase;					
 	my $node;
 	my $parentNode;
     
@@ -69,10 +63,10 @@ sub Worker {
 		#   take one argument (the content of a file) 
 		#*
 			
-        $test_fil 	=	$parser->parse_file($dir.'\\'.$key);			
+        #$test_fil 	=	$parser->parse_file($dir.'\\'.$key);			
 		$test_str  	= 	$parser->parse_string($fileContent{$key});
 	    			
-		$node = $test_fil;
+		$node = $test_str;
 		
 		$node = XMLHelper::nextNode($node);
 
@@ -104,9 +98,8 @@ sub Worker {
 					
 				}#end if attributes
 				
-				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult."/>\n\r";	
-				
-				#https://stackoverflow.com/questions/2860226/how-can-i-check-if-a-perl-array-contains-a-particular-value			
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult." "."/>\n\r";	
+							
 				if ( not ($testcase ~~ @testcases)) {
 					print $testcase."\n";
 					$result .= $testcase;
@@ -116,18 +109,7 @@ sub Worker {
 				}
 			}#end if test-case
 					
-			$node = XMLHelper::nextNode($node); 
-			
-			#if (XMLHelper::allAttributes($node)) {
-			#	@attributes = XMLHelper::allAttributes($node);
-			#
-			#		for (my $i = 0; $i < scalar @attributes; $i++) {
-			#			print $node->nodeName."\n";
-			#			print "attribute name:  ".$attributes[$i]->name."\n";
-			#			print "attribute value: ".$attributes[$i]->value."\n";
-			#		}
-			#
-			#}#end if output	
+			$node = XMLHelper::nextNode($node); 	
 		}#end while	
 	}#end foreach	
 

@@ -1,4 +1,5 @@
 package StringHelper; 
+#use bytes;
  
 	#delete whitespaces of a value
 	sub withoutWhitespaces  {
@@ -26,4 +27,22 @@ package StringHelper;
 		return $value;
 	}
 
+	sub replaceSign {
+	
+		#print "There\n";
+	
+		my $word 		= shift;
+		my $oldSign 	= shift;
+		my $newSign 	= shift;
+	
+		for (my $i = 0; $i < length($word); $i++) {
+			
+			if (substr($word, $i, $i ) eq $oldSign ) {
+				substr($word, $i, $i ) = $newSign; 
+				print $word."\n";
+			} 
+		}#end for
+	return $word;
+	}
+	
 1;	

@@ -10,11 +10,15 @@
 
         this.makeScript = function (id, type, linkMessage)  { 
 
+        var concat;
+        
+        concat                      = type + id;     
+
         return  '<script>'          + ToggleScriptBuilder.ToggleScriptOne 
                                     + '.match(/'+ id +'/)) {' 
                                     + ToggleScriptBuilder.ToggleScriptDefault 
-                                    + 'if ($("#'+ type + id +'").is(":visible")) { $("#'+ type + id +'").hide();}'
-                                    + 'else { $("#'+ type + id +'").show();}   }}); </script>'
+                                    + 'if ($("#'+ concat +'").is(":visible")) { $("#'+ concat +'").hide();}'
+                                    + 'else { $("#'+ concat +'").show();}   }}); </script>'
                                     + '<p style="margin-left: 15px;"><a href="#' + id + '">+</a>' + linkMessage + '-' + id + '</p>';                                                         
         } // makeScript method    
     } //ToggleScriptBuilder

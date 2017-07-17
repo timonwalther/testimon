@@ -78,9 +78,7 @@ fclose($handle);
         <div data-ng-view="" id="ng-view" class="slide-animation"></div>
 
       </div>
-    
     </div>
-	
 	</body>
 
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
