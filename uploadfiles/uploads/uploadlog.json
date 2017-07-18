@@ -1,4 +1,4 @@
 {
-"testframework":"junit",
-"filesnumber":"2"
+"testframework":"gtest",
+"filesnumber":"1"
 }

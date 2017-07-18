@@ -57,9 +57,9 @@ use 	Switch;
 				{ 
 				require "junit.pm";
 				} 	
-			case "googletest"
+			case "gtest"
 				{
-				require "googletest.pm";
+				require "gtest.pm";
 				}
 			case "catch"
 				{
