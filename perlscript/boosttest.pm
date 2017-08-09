@@ -43,6 +43,7 @@ sub Worker {
 	my $string;
 	my $caseResult;
 	my $line;
+	my $time;
 	
 	my $key;
 	my $testcase;
@@ -84,6 +85,8 @@ sub Worker {
 					}#end for 	
 				}#end if attributes
 				
+				#init time
+				$time			= "time=''";
 				$tempNode 		= $node;
 				
 				while (XMLHelper::nextNode($tempNode)->nodeName eq "Info" ) {
@@ -97,7 +100,11 @@ sub Worker {
 					else {
 						$passed = undef;
 					}
-				}#end while  
+				}#end while 
+				
+				if (XMLHelper::nextNode($tempNode)->nodeName eq "TestingTime") {
+					$time = "time='".XMLHelper::nextNode($tempNode)->to_literal."'";
+				}				
 				
 				if ($passed) {
 					$caseResult = "result='success'";
@@ -106,7 +113,7 @@ sub Worker {
 					$caseResult	= "result='failure'";
 				}
 				
-				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult."/>\n\r";	
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$time." ".$caseResult."/>\n\r";	
 						
 				if ( not ($testcase ~~ @testcases)) {
 					print $testcase."\n";

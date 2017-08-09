@@ -31,9 +31,6 @@ sub Worker {
     
 	my $test;
 	my $node;
-	my $tempNode;
-	my $info;
-	my $passed = '1';
 	my @attributes;
 	my @testcases;
 	
@@ -42,6 +39,7 @@ sub Worker {
 	my $string;
 	my $caseResult;
 	my $line;
+	my $time;
 	
 	my $key;
 	my $testcase;
@@ -76,6 +74,10 @@ sub Worker {
 						if ($attributes[$i]->name eq 'name') {
 							$name =  "name='".StringHelper::replaceSign($attributes[$i]->value, "'", "´")."'";
 						}
+						
+						if ($attributes[$i]->name eq 'time') {
+							$name =  "time='".$attributes[$i]->value."'";
+						}
 
 					}#end for 	
 				}#end if attributes
@@ -89,7 +91,7 @@ sub Worker {
 								
 				$line = "line=''"; 
 				
-				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult." "."/>\n\r";	
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$time." ".$caseResult." "."/>\n\r";	
 						
 				if ( not ($testcase ~~ @testcases)) {
 					$result .= $testcase;

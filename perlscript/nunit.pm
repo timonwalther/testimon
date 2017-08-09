@@ -54,6 +54,7 @@ sub Worker {
 	my $string;
 	my $caseResult;
 	my $line;
+	my $time;
 	
 	
     # for all arguments   
@@ -84,6 +85,10 @@ sub Worker {
 						if ($attributes[$i]->name eq 'name') {
 							$name =  "name='".$attributes[$i]->value."'";
 						}
+						
+						if ($attributes[$i]->name eq 'time') {
+							$name =  "time='".$attributes[$i]->value."'";
+						}
 
 						if ($attributes[$i]->name eq 'success') {
 							if ($attributes[$i]->value eq 'True') { 
@@ -98,7 +103,7 @@ sub Worker {
 					
 				}#end if attributes
 				
-				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult." "."/>\n\r";	
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$time." ".$caseResult." "."/>\n\r";	
 							
 				if ( not ($testcase ~~ @testcases)) {
 					print $testcase."\n";

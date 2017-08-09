@@ -31,9 +31,6 @@ sub Worker {
     
 	my $test;
 	my $node;
-	my $tempNode;
-	my $info;
-	my $passed = '1';
 	my @attributes;
 	my @testcases;
 	
@@ -42,6 +39,7 @@ sub Worker {
 	my $string;
 	my $caseResult;
 	my $line;
+	my $time;
 	
 	my $key;
 	my $testcase;
@@ -73,8 +71,14 @@ sub Worker {
 					@attributes = XMLHelper::allAttributes($node);
 					for (my $i = 0; $i < scalar @attributes; $i++) {
 					   
+					    #get testcase name
 						if ($attributes[$i]->name eq 'name') {
 							$name =  "name='".StringHelper::replaceSign($attributes[$i]->value, "'", "´")."'";
+						}
+						
+						#get testcase time
+						if ($attributes[$i]->name eq 'time') {
+							$time =  "time='".StringHelper::replaceSign($attributes[$i]->value, "'", "´")."'";
 						}
 
 					}#end for 	
@@ -89,7 +93,7 @@ sub Worker {
 								
 				$line = "line=''"; 
 				
-				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$caseResult." "."/>\n\r";	
+				$testcase = "<test-case ".$name." ".$fileName." ".$line." ".$time." ".$caseResult." "."/>\n\r";	
 						
 				if ( not ($testcase ~~ @testcases)) {
 					$result .= $testcase;

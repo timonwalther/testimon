@@ -1,4 +1,4 @@
-	//used in   ->   "mixedlibs/bootstrap-fileinput/js/fileinput.js"
+	//used in (path)   ->   "mixedlibs/bootstrap-fileinput/js/fileinput.js"
 	
 	//addendum M&W
     var Iterator, GUIUpTest, TESTTree, ToggleScriptBuilder;
@@ -42,14 +42,11 @@
 
         this.Infos              =   [];		
         //constants
-        this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th><th>File</th></tr></thead><tbody>';
-
-
+        this.InfoTableHead          = '<thead><tr><th>Message</th><th>Line</th><th>Time</th><th>File</th></tr></thead><tbody>';
+		
         this.buildViewContent       = function () {   
         }
-
-
-
+		
         this.buildView              = function (root, itemsLen) {             
 
             //single vars
@@ -70,20 +67,22 @@
 
                             id = nodeCase.getAttribute("name");
 
-                            ViewContent +=  ToggleScriptBuilder.makeScript(id, 'tab', "Details") 
-                                            + '<table id="tab'+ id +'" class="table" hidden>'
+                            ViewContent +=  ToggleScriptBuilder.makeScript(id , 'tab', "Details") 
+                                            + '<table style="margin-left:15px; display: inline;" id="tab'+ id +'" class="table" hidden>'
                                             + this.InfoTableHead;     
 
                                     if (passed) {
                                         ViewContent         += '<tr class="success"><td>' 
                                                                 + nodeCase.getAttribute("name") +   '</td> <td>'
                                                                 + nodeCase.getAttribute("line") +   '</td><td>'
+																+ nodeCase.getAttribute("time") +   '</td><td>'
                                                                 + nodeCase.getAttribute("file") +   '</td></tr>'; 
                                     }         
                                     else {
                                         ViewContent         += '<tr class="danger"><td>' 
                                                                 + nodeCase.getAttribute("name") +   '</td> <td>'
                                                                 + nodeCase.getAttribute("line") +   '</td><td>'
+																+ nodeCase.getAttribute("time") +   '</td><td>'
                                                                 + nodeCase.getAttribute("file") +   '</td></tr>';             
                                     }
                             ViewContent += '</tbody></table>';         
@@ -224,8 +223,8 @@
 						{		
                                     xmlDoc              = GUIUpTest.browserCheckXML(rawFile); 
 
-									var temp, id, infoIterator, currentElem;
-									temp                = ''; 
+									var contentTestcase, id, infoIterator, currentElem;
+									contentTestcase     = ''; 
 									id                  = '';
                                     //name of the testframework
                                     GUIUpTest.testFrameworkName	        = xmlDoc.getElementsByTagName("test-framework")[0].getAttribute("name");                        
@@ -237,8 +236,8 @@
                                     currentElem  = infoIterator.next();
 
                                         while (!currentElem.done) {
-                                            temp        += '<h4 style="margin-left:15px;"> Testcase: ' + currentElem.value.name + '</h4>' + currentElem.value.view + '<br/>';
-                                            currentElem = infoIterator.next();
+                                            contentTestcase		+= '<h4 style="margin-left:15px;"> Testcase: ' + currentElem.value.name + '</h4>' + currentElem.value.view + '<br/>';
+                                            currentElem 		= infoIterator.next();
                                         }
 
                                     infoIterator = null;
@@ -258,7 +257,7 @@
 									id = "id"; //this is only for testing "id" isn't the final solution
         
                                     GUIUpTest.testResult    +=  ToggleScriptBuilder.makeScript(id, 'di', "More Information") 
-															+   '<div id="di'+ id +'" hidden>' + temp + '</div></div>';  
+															+   '<div id="di'+ id +'" hidden>' + contentTestcase + '</div></div>';  
 
 						}
                         else {
