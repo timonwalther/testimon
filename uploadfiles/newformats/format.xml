@@ -1,3 +1,8 @@
-<?xml version="1.0"?><test-framework name="gunit"><test-case name='loadValidPNG' file='gtest_example.xml' line='' result='failure' />
-<test-case name='loadValidBMP' file='gtest_example.xml' line='' result='success' />
+<?xml version="1.0"?><test-framework name="boosttest"><test-case name='args' file='args_cmd.xml' line='28' result='success'/>
+<test-case name='cmd' file='args_cmd.xml' line='75' result='success'/>
+<test-case name='async_out_future' file='async_fut.xml' line='32' result='success'/>
+<test-case name='sync_io' file='bind_stderr.xml' line='43' result='success'/>
+<test-case name='async_io' file='bind_stderr.xml' line='80' result='success'/>
+<test-case name='nul' file='bind_stderr.xml' line='103' result='success'/>
+<test-case name='file_io' file='bind_stderr.xml' line='125' result='success'/>
 </test-framework>

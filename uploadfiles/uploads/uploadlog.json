@@ -1,4 +1,4 @@
 {
-"testframework":"gtest",
-"filesnumber":"1"
+"testframework":"boosttest",
+"filesnumber":"3"
 }
