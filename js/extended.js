@@ -97,7 +97,7 @@
 	GUIUpTest = new function () {
 
                 //constants
-                this.TestOutputTableHead= '<div style="background-color: #F5F5F5;"><table class="table"><thead>'	
+                this.TestOutputTableHead= '<table class="table"><thead>'	
 										+'<tr><th>BUILD </th>'
 										+'<th> BRANCH </th>' 
 										+'<th> SUCCESS</th>'
@@ -242,9 +242,10 @@
 
                                     infoIterator = null;
                             				   
-									GUIUpTest.testResult    += GUIUpTest.TestOutputTableHead;
+									GUIUpTest.testResult    += '<div style="background-color: #F5F5F5; padding-bottom: 1px;">';
 																								
-									GUIUpTest.testResult 	+= '<tbody><tr><td></td>'
+									GUIUpTest.testResult 	+= GUIUpTest.TestOutputTableHead  
+                                                                + '<tbody><tr><td></td>'
 																+ '<td></td>'
 																+ '<td>'                +   GUIUpTest.buildBadge(TESTTree.Infos)  + '</td>'  //produce a shield  
 																+ '<td></td>'
@@ -257,7 +258,16 @@
 									id = "id"; //this is only for testing "id" isn't the final solution
         
                                     GUIUpTest.testResult    +=  ToggleScriptBuilder.makeScript(id, 'di', "More Information") 
-															+   '<div id="di'+ id +'" hidden>' + contentTestcase + '</div></div>';  
+															+   '<div id="di'+ id +'" hidden>' + contentTestcase + '</div>';  
+
+
+
+                                    GUIUpTest.testResult    += '<div style="margin: 15px;">' 
+                                                                + '<button style="margin-right: 20px;" type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> Save</button>'
+                                                                + '<span>&nbsp;&nbsp;</span>'
+                                                                + '<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>'
+                                                                + '</div>'
+                                                                + '</div>';                        
 
 						}
                         else {

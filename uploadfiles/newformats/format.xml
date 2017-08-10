@@ -1,8 +1,8 @@
-<?xml version="1.0"?><test-framework name="boosttest"><test-case name='sync_io' file='bind_stderr.xml' line='43' time='18000' result='success'/>
+<?xml version="1.0"?><test-framework name="boosttest"><test-case name='args' file='args_cmd.xml' line='28' time='21000' result='success'/>
+<test-case name='cmd' file='args_cmd.xml' line='75' time='18000' result='success'/>
+<test-case name='sync_io' file='bind_stderr.xml' line='43' time='18000' result='success'/>
 <test-case name='async_io' file='bind_stderr.xml' line='80' time='26000' result='success'/>
 <test-case name='nul' file='bind_stderr.xml' line='103' time='28000' result='success'/>
 <test-case name='file_io' file='bind_stderr.xml' line='125' time='30000' result='success'/>
-<test-case name='args' file='args_cmd.xml' line='28' time='21000' result='success'/>
-<test-case name='cmd' file='args_cmd.xml' line='75' time='18000' result='success'/>
 <test-case name='async_out_future' file='async_fut.xml' line='32' time='34000' result='success'/>
 </test-framework>

@@ -1,4 +1,7 @@
 <?php 
+
+
+//this function will started after a normal login
 $app->get('/session', function() {
     $db = new DbHandler();
     $session = $db->getSession();
@@ -8,7 +11,7 @@ $app->get('/session', function() {
     echoResponse(200, $session);
 });
 
-
+//this function get a login with github
 $app->get('/loginWithGithub', function () {
 	
 	//github repo
@@ -30,8 +33,6 @@ $app->get('/loginWithGithub', function () {
 		//'code'          => 'https://github.com/login/oauth/authorize' 
 		)
 	);
-	
-	
 	
 	if ($curl->error) {
 		$response["status"]  = "error";
