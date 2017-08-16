@@ -37,18 +37,15 @@ $app->get('/loginWithGithub', function () {
 	if ($curl->error) {
 		$response["status"]  = "error";
 		$response["message"] = 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
-	} else {
+		} else {
 		$response["status"]  = "success";
 		$response["message"] = $curl->response;
 	}
     	
-	
 	error_log($curl->response, 3, "error.log");
-	
-	//return $curl->response;
-	
+
 	echoResponse(200, $response);
-	//$curl->close();
+
 });
 
 
@@ -85,19 +82,26 @@ $app->post('/login', function() use ($app) {
         }
     echoResponse(200, $response);
 });
+
+
+
 $app->post('/signUp', function() use ($app) {
-    $response = array();
-    $r = json_decode($app->request->getBody());
-    verifyRequiredParams(array('email', 'name', 'password'),$r->customer);
+    
+	$response 	= array();
+    $r 			= json_decode($app->request->getBody());
+    
+	verifyRequiredParams(array('email', 'name', 'password'),$r->customer);
     require_once 'passwordHash.php';
-    $db = new DbHandler();
-    $phone = $r->customer->phone;
-    $name = $r->customer->name;
-    $email = $r->customer->email;
-    $address = $r->customer->address;
-    $password = $r->customer->password;
-    $isUserExists = $db->getOneRecord("select 1 from customers_auth where phone='$phone' or email='$email'");
-    if(!$isUserExists){
+	
+    $db 			= new DbHandler();
+    $phone 			= $r->customer->phone;
+    $name 			= $r->customer->name;
+    $email 			= $r->customer->email;
+    $address 		= $r->customer->address;
+    $password 		= $r->customer->password;
+    $isUserExists 	= $db->getOneRecord("select 1 from customers_auth where phone='$phone' or email='$email'");
+    
+	if(!$isUserExists){
         $r->customer->password = passwordHash::hash($password);
         $tabble_name = "customers_auth";
         $column_names = array('phone', 'name', 'email', 'password', 'city', 'address');
@@ -125,12 +129,23 @@ $app->post('/signUp', function() use ($app) {
         echoResponse(201, $response);
     }
 });
+
+
 $app->get('/logout', function() {
-    $db = new DbHandler();
+    
+	$db = new DbHandler();
     $session = $db->destroySession();
-    $response["status"] = "info";
-    $response["message"] = "Logged out successfully";
-    echoResponse(200, $response);
+	
+	//error_log($curl->response, 3, "error.log");
+	
+	$response["uid"] 		= "";
+    $response["email"] 		= "";
+    $response["name"] 		= "";
+	
+    $response["status"] 	= "info";
+    $response["message"] 	= "Logged out successfully";
+    
+	echoResponse(200, $response);
 });
 
 

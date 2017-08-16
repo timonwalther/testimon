@@ -18,12 +18,12 @@
                                     + '.match(/'+ id +'/)) {' 
                                     + ToggleScriptBuilder.ToggleScriptDefault 
                                     + 'if ($("#'+ concat +'").is(":visible")) { $("#'+ concat +'").hide();}'
-                                    + 'else { $("#'+ concat +'").show();}   }}); </script>'
+		+ 'else { $("#'+ concat +'").show(); } }}); </script>'
                                     + '<p style="margin-left: 15px;"><a href="#' + id + '">+</a>' + linkMessage + '-' + id + '</p>';                                                         
         } // makeScript method    
     } //ToggleScriptBuilder
 
-
+//$("a[href=\"'+ id +'\"]").html("-");
     Iterator  = new function () {
 
     this.makeIterator = function (array){
@@ -68,7 +68,7 @@
                             id = nodeCase.getAttribute("name");
 
                             ViewContent +=  ToggleScriptBuilder.makeScript(id , 'tab', "Details") 
-                                            + '<table style="margin-left:15px; display: inline;" id="tab'+ id +'" class="table" hidden>'
+                                            + '<table style="margin-left:15px; width: 350px;" id="tab'+ id +'" class="table" hidden>'
                                             + this.InfoTableHead;     
 
                                     if (passed) {
@@ -242,7 +242,7 @@
 
                                     infoIterator = null;
                             				   
-									GUIUpTest.testResult    += '<div style="background-color: #F5F5F5; padding-bottom: 1px;">';
+									GUIUpTest.testResult    += '<div style="background-color: #F5F5F5; padding-bottom: 1px; margin-bottom: 15px;">';
 																								
 									GUIUpTest.testResult 	+= GUIUpTest.TestOutputTableHead  
                                                                 + '<tbody><tr><td></td>'

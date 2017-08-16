@@ -65,15 +65,22 @@ fclose($handle);
 							</button>
 							<a class="navbar-brand" rel="home" title="Testosteron" href="#/">Testosteron</a>
 						</div>
-		  
+						
+					
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 						<li><a href="#/opensource">OpenSource</a></li>
 						<li><a href="#/business">Business</a></li>
 						<li><a href="#/login">Sign in</a></li>
 						<li><a href="#/signup">Sign up</a></li>
+						<li><a href="#/dashboard">Dashboard</a></li>
+						<li></li>
 						</ul>
-					</div>
+						<div style="color: white"> {{name}} {{email}} {{uid}}  </div>
+					
+						
+						
+					</div>	
 				</div>
 			</div>
 		</div>
@@ -83,6 +90,7 @@ fclose($handle);
         <div data-ng-view="" id="ng-view" class="slide-animation"></div>
 
       </div>
+	  <a ng-click="logout();">Logout</a>
     </div>
 	</body>
 

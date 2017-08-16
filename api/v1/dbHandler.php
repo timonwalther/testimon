@@ -65,16 +65,20 @@ public function getSession(){
     return $sess;
 }
 public function destroySession(){
-    if (!isset($_SESSION)) {
-    session_start(); //always necessary
-    }
-    if(isSet($_SESSION['uid']))
+    
+	if (!isset($_SESSION)) {
+		session_start(); //always necessary
+	}
+    
+	if(isSet($_SESSION['uid']))
     {
         unset($_SESSION['uid']);
         unset($_SESSION['name']);
         unset($_SESSION['email']);
-        $info='info';
-        if(isSet($_COOKIE[$info]))
+        
+		$info='info';
+        
+		if(isSet($_COOKIE[$info]))
         {
             setcookie ($info, '', time() - $cookie_time); //means deleting cookie -> set cookie with time in the past
         }
